@@ -3,10 +3,7 @@ const mongoose = require('mongoose');
 const reflectionSchema = mongoose.Schema({
     text: String,
     mood: String,
-    date: {
-        type: Date,
-        default: Date.now
-    },
+    date: String,
     location: String,
 });
 

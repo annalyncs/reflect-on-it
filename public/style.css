@@ -2,6 +2,11 @@
     box-sizing: border-box
 }
 
+body {
+    width: 1000px;
+    margin: 0 auto;
+}
+
 section {
     border: black solid 1px;
     margin: 10px 0;
