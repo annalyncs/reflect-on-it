@@ -1,8 +1,10 @@
-var express = require('express');
+const express = require('express');
+const morgan = require('morgan');
 
-var app = express();
+const app = express();
 
 app.use(express.static('public'));
+app.use(morgan('common'));
 
 app.listen(process.env.PORT || 8080);
 

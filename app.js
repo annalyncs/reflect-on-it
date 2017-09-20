@@ -1,4 +1,4 @@
-var MOCK_SUBMISSIONS = {
+const MOCK_SUBMISSIONS = {
     "submissions": [
         {
             "id": "111111",
@@ -40,7 +40,7 @@ function getSubmissions(callback) {
 function displaySubmissions(data) {
     for (index in data.submissions) {
         $('body').append(
-            '<p>' + data.statusUpdates[index].text + '<p>');
+            '<p>' + data.submissions[index].text + '<p>');
     }
 }
 
@@ -48,6 +48,6 @@ function getAndDisplaySubmissions() {
     getSubmissions(displaySubmissions);
 }
 
-$(function() {
+$(function () {
     getAndDisplaySubmissions();
 })
