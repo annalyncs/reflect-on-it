@@ -30,3 +30,24 @@ var MOCK_SUBMISSIONS = {
         },
     ]
 }
+
+function getSubmissions(callback) {
+    setTimeout(function () {
+        callback(MOCK_SUBMISSIONS)
+    }, 100);
+}
+
+function displaySubmissions(data) {
+    for (index in data.submissions) {
+        $('body').append(
+            '<p>' + data.statusUpdates[index].text + '<p>');
+    }
+}
+
+function getAndDisplaySubmissions() {
+    getSubmissions(displaySubmissions);
+}
+
+$(function() {
+    getAndDisplaySubmissions();
+})
