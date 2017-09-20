@@ -76,6 +76,8 @@ app.post('/reflections/new', (req, res) => {
         });
 });
 
+//update a reflection
+
 app.put('/reflections/:id', jsonParser, (req, res) => {
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
         res.status(400).json({
@@ -103,6 +105,7 @@ app.put('/reflections/:id', jsonParser, (req, res) => {
         }));
 });
 
+//delete a reflection
 
 app.delete('/reflections/:id', (req, res) => {
     Reflection
@@ -119,6 +122,12 @@ app.delete('/reflections/:id', (req, res) => {
             });
         });
 })
+
+app.use('*', function (req, res) {
+    res.status(404).json({
+        message: 'Not Found'
+    });
+});
 
 
 let server;
