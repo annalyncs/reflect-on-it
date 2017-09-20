@@ -15,6 +15,36 @@ const app = express();
 app.use(express.static('public'));
 app.use(morgan('common'));
 
+
+//retrieve all reflections from the database
+app.get('/reflections', (req, res) => {
+    Reflection
+        .find()
+        .then(reflections => {
+            res.json(reflections);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                error: 'something went wrong'
+            });
+        })
+});
+
+//retrieve reflection by id
+app.get('/reflections/:id', (req, res) => {
+    Reflection
+        .findById(req.params.id)
+        .then(reflections => res.json(reflections))
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                error: 'something went wrong'
+            });
+        });
+});
+
+
 let server;
 
 function runServer(databaseUrl = DATABASE_URL, port = PORT) {
