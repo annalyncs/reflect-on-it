@@ -104,6 +104,22 @@ app.put('/reflections/:id', jsonParser, (req, res) => {
 });
 
 
+app.delete('/reflections/:id', (req, res) => {
+    Reflection
+        .findByIdAndRemove(req.params.id)
+        .then(() => {
+            res.status(204).json({
+                message: 'success'
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                error: 'Something went wrong'
+            });
+        });
+})
+
 
 let server;
 
