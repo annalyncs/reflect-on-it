@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Node Capstone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <link href="style.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -12,15 +14,53 @@
     </header>
 
     <section id="login">
-        <form></form>
+        <form>
+            <h1>Login</h1>
+        </form>
     </section>
 
     <section id="new-entry">
-        <form></form>
+        <form action="#" method="post">
+            <fieldset>
+                <legend>Write a reflection</legend>
+                <label>Date</label>
+                <input type="text" id="date" name="date"><br>
+                <label>Location</label>
+                <input type="text" id="location" name="location"><br>
+                <label>Mood</label>
+                <select>
+                        <option>Happy</option>
+                        <option>Calm</option>
+                        <option>Angry/Frustrated</option>
+                        <option>Anxious</option>
+                        <option>Sad/Upset/Depressed</option>
+                    </select><br>
+                <label>Reflect on it:</label>
+                <textarea></textarea>
+            </fieldset>
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
     </section>
 
     <section id="reflections">
+        <a href="#">Edit</a>
+        <a href="#">Delete</a>
+        <a href="#">All Entries</a>
+        <form action="#" method="get">
+            <h2>I was located at</h2>
+            <p>Home</p>
+            <h2>Mood</h2>
+            <p>Happy</p>
+            <h2>Reflection</h2>
+            <p>Test test test test</p>
+        </form>
+    </section>
 
+    <section id="resources">
+        <h2>Resources</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae pharetra leo. Phasellus accumsan nunc ut mattis gravida. Etiam id dui vitae nulla aliquet fermentum. Sed aliquam malesuada rhoncus. Integer aliquet risus non ex sollicitudin, non consectetur neque commodo. Vestibulum efficitur risus at volutpat aliquet. Aenean placerat purus nibh, sed luctus lectus malesuada sed. Nullam feugiat euismod aliquam. Nunc consectetur imperdiet venenatis. Suspendisse eu leo quam. In aliquam velit a erat tempus efficitur. In ante libero, tempus sed euismod imperdiet, tristique id enim. In id lectus at ante consectetur venenatis.
+
+        </p>
     </section>
 
 </body>

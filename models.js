@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const submissionSchema = mongoose.Schema({
+const reflectionSchema = mongoose.Schema({
     text: String,
     mood: String,
     date: {
@@ -10,8 +10,8 @@ const submissionSchema = mongoose.Schema({
     location: String,
 });
 
-const Submission = mongoose.model('Submision, submissionSchema');
+const Reflection = mongoose.model('Reflection', reflectionSchema);
 
 module.exports = {
-    Submission
+    Reflection
 };

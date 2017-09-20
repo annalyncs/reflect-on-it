@@ -1,5 +1,5 @@
-const MOCK_SUBMISSIONS = {
-    "submissions": [
+const MOCK_REFLECTIONS = {
+    "reflections": [
         {
             "id": "111111",
             "text": "hello world",
@@ -31,23 +31,23 @@ const MOCK_SUBMISSIONS = {
     ]
 }
 
-function getSubmissions(callback) {
+function getReflections(callback) {
     setTimeout(function () {
-        callback(MOCK_SUBMISSIONS)
+        callback(MOCK_REFLECTIONS)
     }, 100);
 }
 
-function displaySubmissions(data) {
-    for (index in data.submissions) {
+function displayReflections(data) {
+    for (index in data.reflections) {
         $('body').append(
-            '<p>' + data.submissions[index].text + '<p>');
+            '<p>' + data.reflections[index].text + '<p>');
     }
 }
 
-function getAndDisplaySubmissions() {
-    getSubmissions(displaySubmissions);
+function getAndDisplayReflections() {
+    getReflections(displayReflections);
 }
 
 $(function () {
-    getAndDisplaySubmissions();
+    getAndDisplayReflections();
 })
