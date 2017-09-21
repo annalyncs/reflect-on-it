@@ -37,7 +37,7 @@ fieldset {
 .reflections-button {
     display: inline-block;
     background: none;
-    border: none;
+    border: 1px solid black;
 }
 
 #reflections p {

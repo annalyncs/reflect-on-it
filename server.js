@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
+mongoose.Promise = global.Promise;
+
 const {
     DATABASE_URL,
     PORT
