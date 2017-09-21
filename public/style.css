@@ -33,3 +33,13 @@ textarea {
 fieldset {
     padding: 10px;
 }
+
+.reflections-button {
+    display: inline-block;
+    background: none;
+    border: none;
+}
+
+#reflections p {
+    display: inline-block;
+}
