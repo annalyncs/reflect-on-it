@@ -31,7 +31,7 @@ function postNewReflection() {
                 console.log(data);
 
                 htmlOutput += '<div class="current-reflection">';
-                htmlOutput += '<input type="hidden" class="reflectionID" value=" ';
+                htmlOutput += '<input type="hidden" class="reflectionID" value="';
                 htmlOutput += data._id;
                 htmlOutput += '">';
                 htmlOutput += '<h2>Date:</h2>';
@@ -79,8 +79,8 @@ function displayReflections() {
                 console.log(reflection);
                 return `<div id="entries">
                         <input type="hidden" class="reflectionID" value="${reflection._id}">
-                        <p>${reflection.date}</p>
-                        <p>${reflection.location}<p>
+                        <p>Date: ${reflection.date}</p>
+                        <p>Location: ${reflection.location}<p>
                         <button id="edit-button" class="reflections-button">Edit</butto>
                         <button id="delete-button" class="reflections-button">Delete</button>
                         <button id="current-button" class="reflections-button">View</button>
@@ -162,6 +162,19 @@ function deleteReflection() {
     })
 };
 
+////update the selected reflection
+//function updateReflection() {
+//    let idParameter = $('div').find('.reflectionID').val();
+//    console.log(idParameter);
+//    $.ajax({
+//        type: 'PUT',
+//        url: REFLECTIONS_URL + '/' + idParameter,
+//        contentType: 'application/json',
+//        success: function () {
+//            console.log('updating');
+//        }
+//    })
+//}
 
 function handleDisplayReflections() {
     $('#view-all-button').click(() => {
@@ -181,7 +194,14 @@ function handleDisplayReflectionsById() {
 function handleDeleteReflections() {
     $('#reflections-container').on('click', '#delete-button', function () {
         deleteReflection();
+        $('.main-buttons').addClass('hide-display');
     });
+}
+
+function handleUpdateReflection() {
+    $('#reflections').on('click', '#edit-button', function () {
+        updateReflection();
+    })
 }
 
 $(function () {
@@ -189,4 +209,5 @@ $(function () {
     handleDeleteReflections();
     handleDisplayReflections();
     handleDisplayReflectionsById();
+//    handleUpdateReflection();
 })
