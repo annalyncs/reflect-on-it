@@ -31,6 +31,9 @@ function postNewReflection() {
                 console.log(data);
 
                 htmlOutput += '<div class="current-reflection">';
+                htmlOutput += '<input type="hidden" class="reflectionID" value=" ';
+                htmlOutput += data._id;
+                htmlOutput += '">';
                 htmlOutput += '<h2>Date:</h2>';
                 htmlOutput += '<p class="reflection-date">';
                 htmlOutput += data.date;
@@ -70,7 +73,7 @@ function displayReflections() {
         success: function (data) {
             console.log(data);
             if (data.length === 0) {
-                $('#reflections').html('No reflections found! Write a new entry!');
+                $('#reflections-container').html('No reflections found! Write a new entry!');
             };
             let reflectionInput = data.map(function (reflection, index) {
                 console.log(reflection);
@@ -102,10 +105,12 @@ function displayReflectionsById() {
         type: 'GET',
         url: REFLECTIONS_URL + '/' + idParameter,
         success: function (data) {
-            console.log(data);
 
             let htmlOutput = "";
             htmlOutput += '<div class="current-reflection">';
+            htmlOutput += '<input type="hidden" class="reflectionID" value="';
+            htmlOutput += data._id;
+            htmlOutput += '">';
             htmlOutput += '<h2>Date:</h2>';
             htmlOutput += '<p class="reflection-date">';
             htmlOutput += data.date;
@@ -137,7 +142,7 @@ function displayReflectionsById() {
 
 //delete selected reflection
 function deleteReflection() {
-    let idParameter = $('#entries').find('.reflectionID').val();
+    let idParameter = $('div').find('.reflectionID').val();
     console.log(idParameter);
     $.ajax({
         type: 'DELETE',
@@ -147,6 +152,12 @@ function deleteReflection() {
         success: function (data) {
             console.log('deleting reflection');
             displayReflections();
+        },
+        failure: function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+            $('reflections').html('No reflections found');
         }
     })
 };
@@ -163,11 +174,12 @@ function handleDisplayReflections() {
 function handleDisplayReflectionsById() {
     $('#reflections').on('click', '#current-button', function () {
         displayReflectionsById();
+        $('.main-buttons').removeClass('hide-display');
     });
 }
 
 function handleDeleteReflections() {
-    $('#reflections').on('click', '#delete-button', function () {
+    $('#reflections-container').on('click', '#delete-button', function () {
         deleteReflection();
     });
 }
