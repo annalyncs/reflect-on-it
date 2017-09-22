@@ -94,8 +94,48 @@ function displayReflections() {
     });
 }
 
-//delete selected reflection
+//display reflections by id
+function displayReflectionsById() {
+    let idParameter = $('#entries').find('.reflectionID').val();
+    console.log(idParameter);
+    $.ajax({
+        type: 'GET',
+        url: REFLECTIONS_URL + '/' + idParameter,
+        success: function (data) {
+            console.log(data);
 
+            let htmlOutput = "";
+            htmlOutput += '<div class="current-reflection">';
+            htmlOutput += '<h2>Date:</h2>';
+            htmlOutput += '<p class="reflection-date">';
+            htmlOutput += data.date;
+            htmlOutput += '</p>';
+            htmlOutput += '<h2>Location:</h2>';
+            htmlOutput += '<p class="reflection-location">';
+            htmlOutput += data.location;
+            htmlOutput += '</p>';
+            htmlOutput += '<h2>Mood:</h2>';
+            htmlOutput += '<p class="reflection-mood">';
+            htmlOutput += data.mood;
+            htmlOutput += '</p>';
+            htmlOutput += '<h2>Reflection:</h2>';
+            htmlOutput += '<p class="reflection-text">';
+            htmlOutput += data.text;
+            htmlOutput += '</p>';
+            htmlOutput += '</div>';
+
+            $('#reflections').html(htmlOutput);
+        },
+        failure: function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+            $('reflections').html('No reflections found');
+        }
+    });
+}
+
+//delete selected reflection
 function deleteReflection() {
     let idParameter = $('#entries').find('.reflectionID').val();
     console.log(idParameter);
@@ -113,10 +153,16 @@ function deleteReflection() {
 
 
 function handleDisplayReflections() {
-    $('#view-button').click(() => {
+    $('#view-all-button').click(() => {
         displayReflections();
         $('.main-buttons').addClass('hide-display');
         $('.current-reflection').addClass('hide-display');
+    });
+}
+
+function handleDisplayReflectionsById() {
+    $('#reflections').on('click', '#current-button', function () {
+        displayReflectionsById();
     });
 }
 
@@ -130,4 +176,5 @@ $(function () {
     postNewReflection();
     handleDeleteReflections();
     handleDisplayReflections();
+    handleDisplayReflectionsById();
 })
