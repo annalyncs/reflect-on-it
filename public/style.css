@@ -40,6 +40,18 @@ fieldset {
     border: 1px solid black;
 }
 
-#reflections p {
-    display: inline-block;
+#entries {
+    border: 1px solid black;
+}
+
+.hide-display {
+    display: none;
+}
+
+div {
+    padding: 10px;
+}
+
+button {
+    margin: 5px;
 }

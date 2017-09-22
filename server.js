@@ -52,6 +52,7 @@ app.get('/reflections/:id', (req, res) => {
 //post a new reflection
 
 app.post('/reflections/new', (req, res) => {
+    console.log(req.body);
     const requiredFields = ['date', 'location', 'mood', 'text'];
     for (let i = 0; i < requiredFields.lenth; i++) {
         const field = requiredFields[i];

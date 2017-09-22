@@ -56,7 +56,7 @@
                 <label>Location</label><br>
                 <input type="text" id="location" name="location" required><br>
                 <label>Mood</label><br>
-                <select name="mood"><br>
+                <select name="mood" id="mood"><br>
                         <option>Happy</option>
                         <option>Calm</option>
                         <option>Angry/Frustrated</option>
@@ -64,7 +64,7 @@
                         <option>Sad/Upset/Depressed</option>
                     </select><br>
                 <label>Reflect on it:</label><br>
-                <textarea name="text" required></textarea><br>
+                <textarea name="text" id="text" required></textarea><br>
                 <input type="submit" id="new-submit-button">
             </fieldset>
 
@@ -73,11 +73,12 @@
 
     <section id="reflections">
         <h1>Reflections</h1>
-        <button id="edit-button" class="reflections-button">Edit</button>
-        <button id="delete-button" class="reflections-button">Delete</button>
-        <button id="view-button" class="reflections-button">View All</button>
-
-<!--
+        <span class="main-buttons" class="hide-display">
+            <button id="edit-button" class="reflections-button">Edit</button>
+            <button id="delete-button" class="reflections-button">Delete</button>
+            <button id="view-button" class="reflections-button">View All</button>
+        </span>
+        <!--
 <h2>All Entries</h2>
 <p>Date, Location</p>
 <button id="edit-button" class="reflections-button">Edit</button>
