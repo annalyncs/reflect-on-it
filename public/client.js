@@ -22,13 +22,12 @@ function postNewReflection() {
 
         let htmlOutput = "";
         $.ajax({
-                method: 'POST',
-                dataType: 'json',
-                contentType: 'application/json',
-                data: JSON.stringify(dataInput),
-                url: NEW_REFLECTIONS_URL,
-            })
-            .done(function (data) {
+            method: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(dataInput),
+            url: NEW_REFLECTIONS_URL,
+            success: function (data) {
                 console.log(data);
 
                 htmlOutput += '<div class="current-reflection">';
@@ -50,14 +49,15 @@ function postNewReflection() {
                 htmlOutput += '</p>';
                 htmlOutput += '</div>';
 
-                $('#reflections').append(htmlOutput);
-            })
-            .fail(function (jqXHR, error, errorThrown) {
+                $('#reflections').html(htmlOutput);
+            },
+            failure: function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
-                $('reflections').append('No entry submitted');
-            });
+                $('reflections').html('No entry submitted');
+            }
+        });
     });
 }
 
@@ -70,23 +70,26 @@ function displayReflections() {
         success: function (data) {
             console.log(data);
             if (data.length === 0) {
-                $('#reflections').append('No reflections found!');
-            }
-            for (index in data) {
-                $('#reflections').append(
-                    `<div id="entries">
-                            <input type="hidden" class="reflectionID" value="${data[index]._id}">
-                            <p>${data[index].date}</p>
-                            <p>${data[index].location}<p>
-                            <button id="edit-button" class="reflections-button">Edit</butto>
-                            <button id="delete-button" class="reflections-button">Delete</button>
-                            <button id="current-button" class="reflections-button">View</button>
-                        </div>`
-                );
+                $('#reflections').html('No reflections found! Write a new entry!');
             };
+            let reflectionInput = data.map(function (reflection, index) {
+                console.log(reflection);
+                return `<div id="entries">
+                        <input type="hidden" class="reflectionID" value="${reflection._id}">
+                        <p>${reflection.date}</p>
+                        <p>${reflection.location}<p>
+                        <button id="edit-button" class="reflections-button">Edit</butto>
+                        <button id="delete-button" class="reflections-button">Delete</button>
+                        <button id="current-button" class="reflections-button">View</button>
+                        </div>`;
+            });
+            $('#reflections').html(reflectionInput);
         },
-        failure: function () {
-            $('reflections').append('No reflections found');
+        failure: function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+            $('reflections').html('No reflections found');
         }
     });
 }
@@ -125,7 +128,6 @@ function handleDeleteReflections() {
 
 $(function () {
     postNewReflection();
-    handle deleteReflection();
+    handleDeleteReflections();
     handleDisplayReflections();
-    //    updateReflections();
 })
