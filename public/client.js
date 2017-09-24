@@ -51,8 +51,14 @@ function postNewReflection() {
                 htmlOutput += data.text;
                 htmlOutput += '</p>';
                 htmlOutput += '</div>';
+                htmlOutput += '<button id="edit-button" class="reflections-button">Edit</button>';
+                htmlOutput += '<button id="delete-button" class="reflections-button">Delete</button>';
+                htmlOutput += '<button id="view-all-button" class="reflections-button">View All</button>';
 
                 $('#reflections').html(htmlOutput);
+                $('#new-reflection').each(function () {
+                    this.reset();
+                })
             },
             failure: function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -79,7 +85,7 @@ function displayReflections() {
                         <input type="hidden" class="reflectionID" value="${reflection._id}">
                         <p>Date: ${reflection.date}</p>
                         <p>Location: ${reflection.location}</p>
-                        <button id="edit-button" class="reflections-button">Edit</butto>
+                        <button id="edit-button" class="reflections-button">Edit</button>
                         <button id="delete-button" class="reflections-button">Delete</button>
                         <button id="current-button" class="reflections-button">View</button>
                         </div>`;
@@ -126,6 +132,9 @@ function displayReflectionsById() {
             htmlOutput += data.text;
             htmlOutput += '</p>';
             htmlOutput += '</div>';
+            htmlOutput += '<button id="edit-button" class="reflections-button">Edit</button>';
+            htmlOutput += '<button id="delete-button" class="reflections-button">Delete</button>';
+            htmlOutput += '<button id="view-all-button" class="reflections-button">View All</button>';
 
             $('#reflections').html(htmlOutput);
         },
@@ -189,6 +198,9 @@ function updateReflection() {
         'mood': moodInput,
         'text': textInput,
     };
+
+    let htmlOutput = "";
+
     $.ajax({
         type: 'PUT',
         url: REFLECTIONS_URL + '/' + idParameter,
@@ -196,7 +208,33 @@ function updateReflection() {
         dataType: 'json',
         data: JSON.stringify(newDataInput),
         success: function (data) {
-            console.log(data);
+            console.log(newDataInput);
+            htmlOutput += '<div class="current-reflection">';
+            htmlOutput += '<input type="hidden" class="reflectionID" value="';
+            htmlOutput += idParameter;
+            htmlOutput += '">';
+            htmlOutput += '<h2>Date:</h2>';
+            htmlOutput += '<p class="reflection-date">';
+            htmlOutput += newDataInput.date;
+            htmlOutput += '</p>';
+            htmlOutput += '<h2>Location:</h2>';
+            htmlOutput += '<p class="reflection-location">';
+            htmlOutput += newDataInput.location;
+            htmlOutput += '</p>';
+            htmlOutput += '<h2>Mood:</h2>';
+            htmlOutput += '<p class="reflection-mood">';
+            htmlOutput += newDataInput.mood;
+            htmlOutput += '</p>';
+            htmlOutput += '<h2>Reflection:</h2>';
+            htmlOutput += '<p class="reflection-text">';
+            htmlOutput += newDataInput.text;
+            htmlOutput += '</p>';
+            htmlOutput += '</div>';
+            htmlOutput += '<button id="edit-button" class="reflections-button">Edit</button>';
+            htmlOutput += '<button id="delete-button" class="reflections-button">Delete</button>';
+            htmlOutput += '<button id="view-all-button" class="reflections-button">View All</button>';
+
+            $('#reflections').html(htmlOutput);
         }
     })
 }
@@ -226,7 +264,7 @@ function deleteReflection() {
 
 
 function handleDisplayReflections() {
-    $('#view-all-button').click(() => {
+    $('#reflections').on('click', '#view-all-button', function () {
         displayReflections();
         $('.main-buttons').addClass('hide-display');
         $('.current-reflection').addClass('hide-display');
