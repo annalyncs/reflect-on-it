@@ -59,6 +59,7 @@ function postNewReflection() {
                 $('#new-reflection').each(function () {
                     this.reset();
                 })
+                $('#new-entry').addClass('hide-display');
             },
             failure: function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -151,6 +152,7 @@ function displayReflectionsById() {
 //first retrieve the post by id and put data in form
 function retrieveReflection() {
     $('#reflections').on('click', '#edit-button', function () {
+        $('#new-entry').removeClass('hide-display');
         let idParameter = $(this).parent().find('.reflectionID').val();
         console.log(idParameter);
         $.ajax({
@@ -235,6 +237,7 @@ function updateReflection() {
             htmlOutput += '<button id="view-all-button" class="reflections-button">View All</button>';
 
             $('#reflections').html(htmlOutput);
+            $('#new-entry').addClass('hide-display');
         }
     })
 }
