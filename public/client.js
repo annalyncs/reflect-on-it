@@ -6,12 +6,12 @@ let NEW_REFLECTIONS_URL = '/reflections/new';
 function postNewReflection() {
     $('#new-reflection').on('submit', function (e) {
         e.preventDefault();
-        var dateInput = $(this).parent().find('#date').val();
-        var locationInput = $(this).parent().find('#location').val();
-        var moodInput = $(this).parent().find('#mood').val();
-        var textInput = $(this).parent().find('#text').val();
+        let dateInput = $(this).parent().find('#date').val();
+        let locationInput = $(this).parent().find('#location').val();
+        let moodInput = $(this).parent().find('#mood').val();
+        let textInput = $(this).parent().find('#text').val();
 
-        var dataInput = {
+        let dataInput = {
             'date': dateInput,
             'location': locationInput,
             'mood': moodInput,
@@ -71,12 +71,10 @@ function displayReflections() {
         type: 'GET',
         url: REFLECTIONS_URL,
         success: function (data) {
-            console.log(data);
             if (data.length === 0) {
                 $('#reflections-container').html('No reflections found! Write a new entry!');
             };
             let reflectionInput = data.map(function (reflection, index) {
-                console.log(reflection);
                 return `<div id="entries">
                         <input type="hidden" class="reflectionID" value="${reflection._id}">
                         <p>Date: ${reflection.date}</p>
@@ -140,6 +138,68 @@ function displayReflectionsById() {
     });
 }
 
+//update the selected reflection
+//first retrieve the post by id and put data in form
+function retrieveReflection() {
+    let idParameter = $('#entries').closest('.reflectionID').val();
+    console.log(idParameter);
+    $.ajax({
+        type: 'GET',
+        url: REFLECTIONS_URL + '/' + idParameter,
+        contentType: 'application/json',
+        success: function (data) {
+            console.log(data);
+            $('#new-entry').html(`<form method="post" id="new-reflection">
+            <input type="hidden" class="reflectionID" value="${data._id}">
+            <fieldset>
+            <legend>Write a reflection</legend>
+            <label>Date</label><br>
+            <input type="text" id="date" name="date" required value="${data.date}"><br>
+            <label>Location</label><br>
+            <input type="text" id="location" name="location" value="${data.location}" required><br>
+            <label>Mood</label><br>
+            <select name="mood" id="mood" value="${data.mood}"><br>
+            <option>Happy</option>
+            <option>Calm</option>
+            <option>Angry/Frustrated</option>
+            <option>Anxious</option>
+            <option>Sad/Upset/Depressed</option>
+            </select><br>
+            <label>Reflect on it:</label><br>
+            <textarea name="text" id="text" required>${data.text}</textarea><br>
+            <input type="submit" id="update-button" value="Update">
+            </fieldset>
+            </form>`)
+        }
+    })
+}
+
+//submit updated reflection
+function updateReflection() {
+    let idParameter = $('form').find('.reflectionID').val();
+    let dateInput = $('form').parent().find('#date').val();
+    let locationInput = $('form').parent().find('#location').val();
+    let moodInput = $('form').parent().find('#mood').val();
+    let textInput = $('form').parent().find('#text').val();
+    let newDataInput = {
+        'date': dateInput,
+        'location': locationInput,
+        'mood': moodInput,
+        'text': textInput,
+    };
+    $.ajax({
+        type: 'PUT',
+        url: REFLECTIONS_URL + '/' + idParameter,
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify(newDataInput),
+        success: function (data) {
+            console.log(data);
+        }
+    })
+}
+
+
 //delete selected reflection
 function deleteReflection() {
     let idParameter = $('div').find('.reflectionID').val();
@@ -162,19 +222,6 @@ function deleteReflection() {
     })
 };
 
-////update the selected reflection
-//function updateReflection() {
-//    let idParameter = $('div').find('.reflectionID').val();
-//    console.log(idParameter);
-//    $.ajax({
-//        type: 'PUT',
-//        url: REFLECTIONS_URL + '/' + idParameter,
-//        contentType: 'application/json',
-//        success: function () {
-//            console.log('updating');
-//        }
-//    })
-//}
 
 function handleDisplayReflections() {
     $('#view-all-button').click(() => {
@@ -198,10 +245,20 @@ function handleDeleteReflections() {
     });
 }
 
-function handleUpdateReflection() {
+function handleRetrieveReflection() {
     $('#reflections').on('click', '#edit-button', function () {
+        let idParameter = $('.reflectionID').map(function () {
+            return $(this).val();
+        }).get().join();
+        console.log(idParameter);
+    });
+}
+
+function handleUpdateReflection() {
+    $('#new-entry').on('click', '#update-button', function (e) {
+        e.preventDefault();
         updateReflection();
-    })
+    });
 }
 
 $(function () {
@@ -209,5 +266,6 @@ $(function () {
     handleDeleteReflections();
     handleDisplayReflections();
     handleDisplayReflectionsById();
-//    handleUpdateReflection();
+    handleRetrieveReflection();
+    handleUpdateReflection();
 })

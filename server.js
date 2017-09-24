@@ -82,11 +82,11 @@ app.post('/reflections/new', (req, res) => {
 //update a reflection
 
 app.put('/reflections/:id', jsonParser, (req, res) => {
-    if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-        res.status(400).json({
-            error: 'Request path id and request body id values must match'
-        });
-    }
+    //    if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    //        res.status(400).json({
+    //            error: 'Request path id and request body id values must match'
+    //        });
+    //    }
 
     const updated = {};
     const updateableFields = ['date', 'location', 'mood', 'text'];
