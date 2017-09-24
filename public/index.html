@@ -15,7 +15,19 @@
         <p>Write a reflection. Find resources. Take a breath.</p>
     </header>
 
-    <section id="login">
+    <navigation role="navigation">
+        <div class="navigation-buttons">
+            <ul>
+                <li><button id="nav-create-button" class="nav-button">Create a New Entry</button></li>
+                <li><button id="nav-view-button" class="nav-button">View all Entries</button></li>
+                <li><button id="nav-resources-button" class="nav-button">Resources</button></li>
+            </ul>
+        </div>
+    </navigation>
+
+
+
+    <section id="login" class="hide-display">
         <form>
             <h1>Login</h1>
             <fieldset>
@@ -30,7 +42,7 @@
         </form>
     </section>
 
-    <section id="signup">
+    <section id="signup" class="hide-display">
         <form>
             <h1>Signup</h1>
             <fieldset>
@@ -71,20 +83,14 @@
         </form>
     </section>
 
-    <section id="reflections-container">
+    <section id="reflections-container" class="hide-display">
         <h1>Reflections</h1>
-<!--
-<span class="main-buttons">
-            <button id="edit-button" class="reflections-button">Edit</button>
-            <button id="delete-button" class="reflections-button">Delete</button>
-            <button id="view-all-button" class="reflections-button">View All</button>
-        </span>
--->
+
         <div id="reflections">
         </div>
     </section>
 
-    <section id="resources">
+    <section id="resources" class="hide-display">
         <h1>Resources</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae pharetra leo. Phasellus accumsan nunc ut mattis gravida. Etiam id dui vitae nulla aliquet fermentum. Sed aliquam malesuada rhoncus. Integer aliquet risus non ex sollicitudin, non consectetur neque commodo. Vestibulum efficitur risus at volutpat aliquet. Aenean placerat purus nibh, sed luctus lectus malesuada sed. Nullam feugiat euismod aliquam. Nunc consectetur imperdiet venenatis. Suspendisse eu leo quam. In aliquam velit a erat tempus efficitur. In ante libero, tempus sed euismod imperdiet, tristique id enim. In id lectus at ante consectetur venenatis.
 

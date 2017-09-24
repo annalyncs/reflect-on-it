@@ -55,3 +55,25 @@ div {
 button {
     margin: 5px;
 }
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    overflow: hidden;
+}
+
+ul li {
+    display: inline;
+    text-align: center;
+}
+
+div.navigation-buttons {
+    display: inline-block;
+    text-align: right;
+}
+
+.nav-button {
+    background: none;
+    border: 1px solid black;
+}

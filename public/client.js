@@ -60,6 +60,7 @@ function postNewReflection() {
                     this.reset();
                 })
                 $('#new-entry').addClass('hide-display');
+                $('#reflections-container').removeClass('hide-display');
             },
             failure: function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -79,7 +80,11 @@ function displayReflections() {
         url: REFLECTIONS_URL,
         success: function (data) {
             if (data.length === 0) {
-                $('#reflections-container').html('No reflections found! Write a new entry!');
+                $('#reflections-container').html('<p>No reflections found!</p><br><button id="new-entry-button" class="reflections-button">Write a new entry!</button>');
+                $('#reflections').on('click', '#new-entry-button', function () {
+                    $('#new-entry').removeClass('hide-display');
+                });
+
             };
             let reflectionInput = data.map(function (reflection, index) {
                 return `<div id="entries">
@@ -144,6 +149,7 @@ function displayReflectionsById() {
             console.log(error);
             console.log(errorThrown);
             $('reflections').html('No reflections found');
+            $('#new-entry').removeClass('hide-display');
         }
     });
 }
@@ -153,6 +159,7 @@ function displayReflectionsById() {
 function retrieveReflection() {
     $('#reflections').on('click', '#edit-button', function () {
         $('#new-entry').removeClass('hide-display');
+        $('#reflections-container').addClass('hide-display');
         let idParameter = $(this).parent().find('.reflectionID').val();
         console.log(idParameter);
         $.ajax({
@@ -238,6 +245,7 @@ function updateReflection() {
 
             $('#reflections').html(htmlOutput);
             $('#new-entry').addClass('hide-display');
+            $('#reflections-container').removeClass('hide-display');
         }
     })
 }
@@ -261,6 +269,7 @@ function deleteReflection() {
             console.log(error);
             console.log(errorThrown);
             $('reflections').html('No reflections found');
+            $('#new-entry').removeClass('hide-display');
         }
     })
 };
