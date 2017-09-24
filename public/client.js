@@ -78,7 +78,7 @@ function displayReflections() {
                 return `<div id="entries">
                         <input type="hidden" class="reflectionID" value="${reflection._id}">
                         <p>Date: ${reflection.date}</p>
-                        <p>Location: ${reflection.location}<p>
+                        <p>Location: ${reflection.location}</p>
                         <button id="edit-button" class="reflections-button">Edit</butto>
                         <button id="delete-button" class="reflections-button">Delete</button>
                         <button id="current-button" class="reflections-button">View</button>
@@ -141,37 +141,39 @@ function displayReflectionsById() {
 //update the selected reflection
 //first retrieve the post by id and put data in form
 function retrieveReflection() {
-    let idParameter = $('#entries').closest('.reflectionID').val();
-    console.log(idParameter);
-    $.ajax({
-        type: 'GET',
-        url: REFLECTIONS_URL + '/' + idParameter,
-        contentType: 'application/json',
-        success: function (data) {
-            console.log(data);
-            $('#new-entry').html(`<form method="post" id="new-reflection">
-            <input type="hidden" class="reflectionID" value="${data._id}">
-            <fieldset>
-            <legend>Write a reflection</legend>
-            <label>Date</label><br>
-            <input type="text" id="date" name="date" required value="${data.date}"><br>
-            <label>Location</label><br>
-            <input type="text" id="location" name="location" value="${data.location}" required><br>
-            <label>Mood</label><br>
-            <select name="mood" id="mood" value="${data.mood}"><br>
-            <option>Happy</option>
-            <option>Calm</option>
-            <option>Angry/Frustrated</option>
-            <option>Anxious</option>
-            <option>Sad/Upset/Depressed</option>
-            </select><br>
-            <label>Reflect on it:</label><br>
-            <textarea name="text" id="text" required>${data.text}</textarea><br>
-            <input type="submit" id="update-button" value="Update">
-            </fieldset>
-            </form>`)
-        }
-    })
+    $('#reflections').on('click', '#edit-button', function () {
+        let idParameter = $(this).parent().find('.reflectionID').val();
+        console.log(idParameter);
+        $.ajax({
+            type: 'GET',
+            url: REFLECTIONS_URL + '/' + idParameter,
+            contentType: 'application/json',
+            success: function (data) {
+                console.log(data);
+                $('#new-entry').html(`<form method="post" id="new-reflection">
+                <input type="hidden" class="reflectionID" value="${data._id}">
+                <fieldset>
+                <legend>Write a reflection</legend>
+                <label>Date</label><br>
+                <input type="text" id="date" name="date" required value="${data.date}"><br>
+                <label>Location</label><br>
+                <input type="text" id="location" name="location" value="${data.location}" required><br>
+                <label>Mood</label><br>
+                <select name="mood" id="mood" value="${data.mood}"><br>
+                <option>Happy</option>
+                <option>Calm</option>
+                <option>Angry/Frustrated</option>
+                <option>Anxious</option>
+                <option>Sad/Upset/Depressed</option>
+                </select><br>
+                <label>Reflect on it:</label><br>
+                <textarea name="text" id="text" required>${data.text}</textarea><br>
+                <input type="submit" id="update-button" value="Update">
+                </fieldset>
+                </form>`)
+            }
+        });
+    });
 }
 
 //submit updated reflection
@@ -245,15 +247,6 @@ function handleDeleteReflections() {
     });
 }
 
-function handleRetrieveReflection() {
-    $('#reflections').on('click', '#edit-button', function () {
-        let idParameter = $('.reflectionID').map(function () {
-            return $(this).val();
-        }).get().join();
-        console.log(idParameter);
-    });
-}
-
 function handleUpdateReflection() {
     $('#new-entry').on('click', '#update-button', function (e) {
         e.preventDefault();
@@ -266,6 +259,6 @@ $(function () {
     handleDeleteReflections();
     handleDisplayReflections();
     handleDisplayReflectionsById();
-    handleRetrieveReflection();
+    retrieveReflection();
     handleUpdateReflection();
 })
