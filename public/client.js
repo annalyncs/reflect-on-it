@@ -304,6 +304,32 @@ function handleUpdateReflection() {
     });
 }
 
+//navigation buttons
+
+function handleNavCreateButton() {
+    $('#nav-create-button').click(function () {
+        $('#new-entry').removeClass('hide-display');
+        $('#reflections-container').addClass('hide-display');
+        $('#resources').addClass('hide-display');
+    })
+}
+
+function handleNavViewButton() {
+    $('#nav-view-button').click(function () {
+        $('#reflections-container').removeClass('hide-display');
+        $('#new-entry').addClass('hide-display');
+        $('#resources').addClass('hide-display');
+    })
+}
+
+function handleNavResourcesButton() {
+    $('#nav-resources-button').click(function () {
+        $('#resources').removeClass('hide-display');
+        $('#new-entry').addClass('hide-display');
+        $('#reflections-container').addClass('hide-display');
+    })
+}
+
 $(function () {
     postNewReflection();
     handleDeleteReflections();
@@ -311,4 +337,7 @@ $(function () {
     handleDisplayReflectionsById();
     retrieveReflection();
     handleUpdateReflection();
+    handleNavCreateButton();
+    handleNavViewButton();
+    handleNavResourcesButton()
 })
