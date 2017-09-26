@@ -16,7 +16,7 @@ const createAuthToken = user => {
 
 const router = express.Router();
 
-outer.post(
+router.post(
     '/login',
     // The user provides a username and password to login
     passport.authenticate('basic', {
@@ -44,3 +44,7 @@ router.post(
         });
     }
 );
+
+module.exports = {
+    router
+};

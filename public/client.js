@@ -189,6 +189,12 @@ function retrieveReflection() {
                 <input type="submit" id="update-button" value="Update">
                 </fieldset>
                 </form>`)
+            },
+            failure: function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+                $('reflections').html('No reflections found');
             }
         });
     });
@@ -246,6 +252,12 @@ function updateReflection() {
             $('#reflections').html(htmlOutput);
             $('#new-entry').addClass('hide-display');
             $('#reflections-container').removeClass('hide-display');
+        },
+        failure: function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+            $('reflections').html('No reflections found');
         }
     })
 }
@@ -308,6 +320,7 @@ function handleUpdateReflection() {
 
 function handleNavCreateButton() {
     $('#nav-create-button').click(function () {
+        displayReflections();
         $('#new-entry').removeClass('hide-display');
         $('#reflections-container').addClass('hide-display');
         $('#resources').addClass('hide-display');
