@@ -7,6 +7,7 @@ function clickLogin() {
     $('.login-link').click(function () {
         $('.start-page').addClass('hide-display');
         $('#login').removeClass('hide-display');
+        $('#signup').addClass('hide-display');
     });
 }
 
@@ -14,6 +15,7 @@ function clickSignup() {
     $('.signup-link').click(function () {
         $('.start-page').addClass('hide-display');
         $('#signup').removeClass('hide-display');
+        $('#login').addClass('hide-display');
     });
 }
 

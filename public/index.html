@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Node Capstone</title>
+    <title>Self-Reflections</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
     <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto" rel="stylesheet">
     <link href="style.css" rel="stylesheet" />
@@ -13,6 +13,7 @@
     <header role="banner">
         <div class="header-container">
             <h1>Self-Reflections</h1>
+            <p>Reflect. Express. Breathe. </p>
         </div>
     </header>
 
@@ -36,36 +37,39 @@
 
 
 
-    <section id="login" class="hide-display row">
-        <form>
+    <section id="login" class="login hide-display row">
+        <span class="form-container">
+           <form>
             <h1>Login</h1>
             <fieldset>
-                <label for="username">Username</label><br>
+                <label for="username">Username</label>
                 <input type="username" name="username" required>
                 <br><br>
-                <label for="password">Password</label><br>
+                <label for="password">Password</label>
                 <input type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
                 <br>
                 <input type="submit" id="login-button">
             </fieldset>
-        </form>
+            </form>
+        </span>
+        <a href="#" class="signup-link">Need to Signup?</a>
     </section>
 
-    <section id="signup" class=" hide-display row">
+    <section id="signup" class="signup hide-display row">
         <form>
             <h1>Signup</h1>
             <fieldset>
                 <label for="name">Name</label><br>
                 <input type="text" id="name-input"><br>
                 <label for="username">Username</label><br>
-                <input type="username" name="username" id="username-input" required>
-                <br><br>
+                <input type="username" name="username" id="username-input" required><br>
                 <label for="password">Password</label><br>
                 <input type="password" id="password-input" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
                 <br>
                 <input type="submit" id="signup-button">
             </fieldset>
         </form>
+        <a href="#" class="login-link">Login instead?</a>
     </section>
 
     <section id="new-entry" class="hide-display row">

@@ -15,6 +15,12 @@ legend {
     font-size: 32px;
 }
 
+header h1 {
+    font-size: 40px;
+    color: #f2b995;
+    margin-bottom: 1px;
+}
+
 a {
     text-decoration: none;
     color: #f2b995;
@@ -24,9 +30,33 @@ a:visited {
     color: #f2b995;
 }
 
+form fieldset {
+    border: none;
+}
+
+.login,
+.signup {
+    text-align: center;
+}
+
 header {
     width: 100%;
-    background-color: white;
+    margin: 0;
+    padding: 5px;
+    background: white;
+    box-shadow: 0 0 10px black;
+}
+
+header p {
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+form label {
+    text-align: justify;
+}
+
+input {
     margin: 0;
 }
 
@@ -36,6 +66,11 @@ header div.header-container {
 
 .start-page {
     text-align: center;
+}
+
+.start-page p {
+    color: #898281;
+    font-size: 16px;
 }
 
 section {
