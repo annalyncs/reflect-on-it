@@ -18,12 +18,12 @@ const {
 
 const {
     router: usersRouter
-} = require('./users/router.js');
+} = require('./users/router');
 const {
     router: authRouter,
     basicStrategy,
     jwtStrategy
-} = require('./auth/router.js');
+} = require('./auth/router');
 
 const app = express();
 
@@ -41,13 +41,26 @@ app.use(function (req, res, next) {
 //app.use(passport.initialize());
 //passport.use(basicStrategy);
 //passport.use(jwtStrategy);
-//
-//app.use('/api/users/', usersRouter);
-//app.use('/api/auth/', authRouter);
+
+app.use('/reflections/users/', usersRouter);
+app.use('/reflections/auth/', authRouter);
+
 app.use(express.static('public'));
 app.use(morgan('common'));
 app.use(bodyParser.json());
 
+//a protected endpoint
+app.get(
+    '/api/protected',
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    (req, res) => {
+        return res.json({
+            data: 'protected'
+        });
+    }
+);
 
 //retrieve all reflections from the database
 app.get('/reflections', (req, res) => {

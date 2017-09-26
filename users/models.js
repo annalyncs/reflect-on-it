@@ -16,7 +16,9 @@ const UserSchema = mongoose.Schema({
     name: {
         type: String,
         default: ''
-    }
+    },
+}, {
+    collection: 'users'
 });
 
 UserSchema.methods.apiRepr = function () {

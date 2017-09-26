@@ -1,10 +1,26 @@
 let REFLECTIONS_URL = '/reflections';
 let NEW_REFLECTIONS_URL = '/reflections/new';
+let USER_URL = '/reflections/users/';
+let USER_AUTH_URL = '/reflections/auth/login';
+
+function clickLogin() {
+    $('.login-link').click(function () {
+        $('.start-page').addClass('hide-display');
+        $('#login').removeClass('hide-display');
+    });
+}
+
+function clickSignup() {
+    $('.signup-link').click(function () {
+        $('.start-page').addClass('hide-display');
+        $('#signup').removeClass('hide-display');
+    });
+}
 
 
 //post a new reflection
 function postNewReflection() {
-    $('#new-reflection').on('submit', function (e) {
+    $('#new-submit-button').on('click', function (e) {
         e.preventDefault();
         let dateInput = $(this).parent().find('#date').val();
         let locationInput = $(this).parent().find('#location').val();
@@ -56,9 +72,7 @@ function postNewReflection() {
                 htmlOutput += '<button id="view-all-button" class="reflections-button">View All</button>';
 
                 $('#reflections').html(htmlOutput);
-                $('#new-reflection').each(function () {
-                    this.reset();
-                })
+                $('form#new-reflection :input').val("");
                 $('#new-entry').addClass('hide-display');
                 $('#reflections-container').removeClass('hide-display');
             },
@@ -76,7 +90,7 @@ function postNewReflection() {
 //display all reflections
 function displayReflections() {
     $.ajax({
-        type: 'GET',
+        method: 'GET',
         url: REFLECTIONS_URL,
         success: function (data) {
             if (data.length === 0) {
@@ -112,7 +126,7 @@ function displayReflectionsById() {
     let idParameter = $('#entries').find('.reflectionID').val();
     console.log(idParameter);
     $.ajax({
-        type: 'GET',
+        method: 'GET',
         url: REFLECTIONS_URL + '/' + idParameter,
         success: function (data) {
 
@@ -163,7 +177,7 @@ function retrieveReflection() {
         let idParameter = $(this).parent().find('.reflectionID').val();
         console.log(idParameter);
         $.ajax({
-            type: 'GET',
+            method: 'GET',
             url: REFLECTIONS_URL + '/' + idParameter,
             contentType: 'application/json',
             success: function (data) {
@@ -186,7 +200,7 @@ function retrieveReflection() {
                 </select><br>
                 <label>Reflect on it:</label><br>
                 <textarea name="text" id="text" required>${data.text}</textarea><br>
-                <input type="submit" id="update-button" value="Update">
+                <button type="submit" id="update-button">Update</button>
                 </fieldset>
                 </form>`)
             },
@@ -217,7 +231,7 @@ function updateReflection() {
     let htmlOutput = "";
 
     $.ajax({
-        type: 'PUT',
+        method: 'PUT',
         url: REFLECTIONS_URL + '/' + idParameter,
         contentType: 'application/json',
         dataType: 'json',
@@ -268,7 +282,7 @@ function deleteReflection() {
     let idParameter = $('div').find('.reflectionID').val();
     console.log(idParameter);
     $.ajax({
-        type: 'DELETE',
+        method: 'DELETE',
         url: REFLECTIONS_URL + '/' + idParameter,
         contentType: 'application/json',
         dataType: 'json',
@@ -320,15 +334,17 @@ function handleUpdateReflection() {
 
 function handleNavCreateButton() {
     $('#nav-create-button').click(function () {
-        displayReflections();
+        $('form#new-reflection :input').val("");
         $('#new-entry').removeClass('hide-display');
         $('#reflections-container').addClass('hide-display');
         $('#resources').addClass('hide-display');
+
     })
 }
 
 function handleNavViewButton() {
     $('#nav-view-button').click(function () {
+        displayReflections();
         $('#reflections-container').removeClass('hide-display');
         $('#new-entry').addClass('hide-display');
         $('#resources').addClass('hide-display');
@@ -343,6 +359,53 @@ function handleNavResourcesButton() {
     })
 }
 
+
+//post a new user to database
+function createNewUser() {
+    $('#signup-button').click(function (e) {
+        e.preventDefault();
+        let nameInput = $(this).parent().find('#name-input').val();
+        let usernameInput = $(this).parent().find('#username-input').val();
+        let passwordInput = $(this).parent().find('#password-input').val();
+
+        let userInput = {
+            'username': usernameInput,
+            'name': nameInput,
+            'password': passwordInput
+        };
+        $.ajax({
+            url: USER_URL,
+            method: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(userInput),
+            success: function (data) {
+                console.log('new user created');
+            },
+            failure: function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            }
+        })
+    })
+}
+
+//login to app
+function loginApp() {
+    $('#login-button').click(function (e) {
+        e.preventDefault();
+        console.log('logging in');
+        $.ajax({
+            url: USER_AUTH_URL,
+            method: 'POST',
+            success: function () {
+                console.log('success');
+            }
+        });
+    });
+}
+
 $(function () {
     postNewReflection();
     handleDeleteReflections();
@@ -353,4 +416,8 @@ $(function () {
     handleNavCreateButton();
     handleNavViewButton();
     handleNavResourcesButton()
+    createNewUser();
+    loginApp();
+    clickLogin();
+    clickSignup();
 })

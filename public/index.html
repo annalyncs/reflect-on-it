@@ -11,11 +11,12 @@
 
 <body>
     <header role="banner">
-        <h1>Self-Reflections</h1>
-        <p>Write a reflection. Find resources. Take a breath.</p>
+        <div class="header-container">
+            <h1>Self-Reflections</h1>
+        </div>
     </header>
 
-    <navigation role="navigation">
+    <navigation role="navigation" class="row">
         <div class="navigation-buttons">
             <ul>
                 <li><button id="nav-create-button" class="nav-button">Create a New Entry</button></li>
@@ -25,41 +26,49 @@
         </div>
     </navigation>
 
+    <section class="start-page row">
+        <h2>Take a Moment to Reflect</h2>
+        <p>Write a reflection. Express your emotions. Find resources.</p>
+        <span class="login">
+            <a href="#" class="login-link">Login</a> | <a href="#" class="signup-link">Signup</a>
+        </span>
+    </section>
 
 
-    <section id="login">
+
+    <section id="login" class="hide-display row">
         <form>
             <h1>Login</h1>
             <fieldset>
-                <label for="email">Email</label><br>
-                <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+                <label for="username">Username</label><br>
+                <input type="username" name="username" required>
                 <br><br>
                 <label for="password">Password</label><br>
                 <input type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
                 <br>
-                <input type="submit">
+                <input type="submit" id="login-button">
             </fieldset>
         </form>
     </section>
 
-    <section id="signup">
+    <section id="signup" class=" hide-display row">
         <form>
             <h1>Signup</h1>
             <fieldset>
                 <label for="name">Name</label><br>
-                <input type="text"><br>
-                <label for="email">Email</label><br>
-                <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+                <input type="text" id="name-input"><br>
+                <label for="username">Username</label><br>
+                <input type="username" name="username" id="username-input" required>
                 <br><br>
                 <label for="password">Password</label><br>
-                <input type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+                <input type="password" id="password-input" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
                 <br>
-                <input type="submit">
+                <input type="submit" id="signup-button">
             </fieldset>
         </form>
     </section>
 
-    <section id="new-entry" class="hide-display">
+    <section id="new-entry" class="hide-display row">
         <form method="post" id="new-reflection">
             <fieldset>
                 <legend>Write a reflection</legend>
@@ -77,20 +86,20 @@
                     </select><br>
                 <label>Reflect on it:</label><br>
                 <textarea name="text" id="text" required></textarea><br>
-                <input type="submit" id="new-submit-button">
+                <button type="submit" id="new-submit-button">Submit</button>
             </fieldset>
 
         </form>
     </section>
 
-    <section id="reflections-container" class="hide-display">
+    <section id="reflections-container" class="hide-display row">
         <h1>Reflections</h1>
 
         <div id="reflections">
         </div>
     </section>
 
-    <section id="resources" class="hide-display">
+    <section id="resources" class="hide-display row">
         <h1>Resources</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae pharetra leo. Phasellus accumsan nunc ut mattis gravida. Etiam id dui vitae nulla aliquet fermentum. Sed aliquam malesuada rhoncus. Integer aliquet risus non ex sollicitudin, non consectetur neque commodo. Vestibulum efficitur risus at volutpat aliquet. Aenean placerat purus nibh, sed luctus lectus malesuada sed. Nullam feugiat euismod aliquam. Nunc consectetur imperdiet venenatis. Suspendisse eu leo quam. In aliquam velit a erat tempus efficitur. In ante libero, tempus sed euismod imperdiet, tristique id enim. In id lectus at ante consectetur venenatis.
 

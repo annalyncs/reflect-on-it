@@ -2,22 +2,46 @@
     box-sizing: border-box;
 }
 
+body {
+    margin: 0 auto;
+    font-family: 'Roboto', sans-serif;
+    background: #65869f;
+}
+
 h1,
+h2,
 legend {
     font-family: 'Quicksand', sans-serif;
     font-size: 32px;
 }
 
-body {
-    width: 1000px;
-    margin: 0 auto;
-    font-family: 'Roboto', sans-serif;
+a {
+    text-decoration: none;
+    color: #f2b995;
+}
+
+a:visited {
+    color: #f2b995;
+}
+
+header {
+    width: 100%;
+    background-color: white;
+    margin: 0;
+}
+
+header div.header-container {
+    display: inline-block;
+}
+
+.start-page {
+    text-align: center;
 }
 
 section {
-    border: black solid 1px;
     margin: 10px 0;
     padding: 10px;
+    background: white;
 }
 
 label {
@@ -76,4 +100,9 @@ div.navigation-buttons {
 .nav-button {
     background: none;
     border: 1px solid black;
+}
+
+.row {
+    width: 1000px;
+    margin: 0 auto;
 }
