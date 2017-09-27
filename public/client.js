@@ -418,7 +418,7 @@ function loginApp() {
             method: 'POST',
             username: usernameInput,
             password: passwordInput,
-            success: function () {
+            success: function (data) {
                 console.log('success');
                 $('#login').addClass('hide-display');
                 $('.navigation-buttons').removeClass('hide-display');
