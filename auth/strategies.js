@@ -2,12 +2,9 @@ const passport = require('passport');
 const {
     BasicStrategy
 } = require('passport-http');
-const {
-    // Assigns the Strategy export to the name JwtStrategy using object
-    // destructuring
-    Strategy: JwtStrategy,
-    ExtractJwt
-} = require('passport-jwt');
+
+const JwtStrategy = require('passport-jwt').Strategy,
+    ExtractJwt = require('passport-jwt').ExtractJwt;
 
 const {
     User

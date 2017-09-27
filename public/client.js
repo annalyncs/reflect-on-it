@@ -384,8 +384,11 @@ function createNewUser() {
             success: function (data) {
                 console.log('new user created');
                 $('#signup').addClass('hide-display');
+                $('.navigation-buttons').removeClass('hide-display');
                 $('#new-entry').removeClass('hide-display');
-                $('header').append('<p style="text-align:right; color: #898281;">Logged in as: ' + userInput.username + '</p><p style="text-align:right;"><a href="#">LOGOUT</a></p>')
+                $('header').append('<p style="text-align:right; color: #898281;" class="logged-in-as">Logged in as: ' + userInput.username + '</p><p style="text-align:right;"><a href="#" class="logout">LOGOUT</a></p>')
+                $('form#signup :input').val("");
+                $('form#login :input').val("");
             },
             failure: function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -398,17 +401,49 @@ function createNewUser() {
 
 //login to app
 function loginApp() {
+    let nameInput = $(this).parent().find('#name-input').val();
+    let usernameInput = $(this).parent().find('#username-input').val();
+    let passwordInput = $(this).parent().find('#password-input').val();
+
+    let userInput = {
+        'username': usernameInput,
+        'name': nameInput,
+        'password': passwordInput
+    };
     $('#login-button').click(function (e) {
         e.preventDefault();
         console.log('logging in');
         $.ajax({
             url: USER_AUTH_URL,
             method: 'POST',
+            username: usernameInput,
+            password: passwordInput,
             success: function () {
                 console.log('success');
+                $('#login').addClass('hide-display');
+                $('.navigation-buttons').removeClass('hide-display');
+                $('#new-entry').removeClass('hide-display');
+                $('header').append('<p style="text-align:right; color: #898281;" class="logged-in-as">Logged in as: ' + userInput.username + '</p><p style="text-align:right;"><a href="#" class="logout">LOGOUT</a></p>')
+                $('form#signup :input').val("");
+                $('form#signup :input').val("");
+                $('form#login :input').val("");
+                $('.navigation-buttons').removeClass('hide-display');
             }
         });
     });
+}
+
+//logout
+function logoutApp() {
+    $('header').on('click', '.logout', function () {
+        $('#signup').addClass('hide-display');
+        $('#new-entry').addClass('hide-display');
+        $('#reflections').addClass('hide-display');
+        $('#resources').addClass('hide-display');
+        $('.logged-in-as').addClass('hide-display');
+        $('#login').removeClass('hide-display');
+        $('.logout').addClass('hide-display');
+    })
 }
 
 $(function () {
@@ -425,4 +460,5 @@ $(function () {
     loginApp();
     clickLogin();
     clickSignup();
+    logoutApp();
 })

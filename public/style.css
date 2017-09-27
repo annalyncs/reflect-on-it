@@ -4,8 +4,13 @@
 
 body {
     margin: 0 auto;
+    padding: 0;
     font-family: 'Roboto', sans-serif;
     background: #65869f;
+}
+
+.hide-display {
+    display: none;
 }
 
 h1,
@@ -13,12 +18,6 @@ h2,
 legend {
     font-family: 'Quicksand', sans-serif;
     font-size: 32px;
-}
-
-header h1 {
-    font-size: 40px;
-    color: #f2b995;
-    margin-bottom: 1px;
 }
 
 a {
@@ -30,47 +29,18 @@ a:visited {
     color: #f2b995;
 }
 
-form fieldset {
-    border: none;
+.reflections-button {
+    display: inline-block;
+    background: none;
+    border: 1px solid black;
 }
 
-.login,
-.signup {
-    text-align: center;
-}
-
-header {
-    width: 100%;
-    margin: 0;
-    padding: 5px;
-    background: white;
-    box-shadow: 0 0 10px black;
-}
-
-header p {
-    margin-bottom: 5px;
+div {
     padding: 10px;
 }
 
-form label {
-    text-align: justify;
-}
-
-input {
-    margin: 0;
-}
-
-header div.header-container {
-    display: inline-block;
-}
-
-.start-page {
-    text-align: center;
-}
-
-.start-page p {
-    color: #898281;
-    font-size: 16px;
+button {
+    margin: 5px;
 }
 
 section {
@@ -78,6 +48,59 @@ section {
     padding: 10px;
     background: white;
     text-align: center;
+}
+
+.section-header {
+    color: #f2b995;
+    margin: 10px;
+}
+
+.start-page p {
+    color: #898281;
+    font-size: 16px;
+}
+
+
+/*****HEADER*****/
+
+header h1 {
+    font-size: 40px;
+    color: #f2b995;
+    margin-bottom: 1px;
+}
+
+header {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 5px;
+    background: white;
+    box-shadow: 0 0 10px black;
+}
+
+header p {
+    margin: 0;
+    padding: 10px;
+}
+
+header div.header-container {
+    display: inline-block;
+}
+
+
+/*****FORMS*****/
+
+form fieldset {
+    border: none;
+    margin: 20px;
+}
+
+.login,
+.signup {
+    text-align: center;
+}
+
+form label {
+    text-align: justify;
 }
 
 label {
@@ -95,29 +118,6 @@ fieldset {
     padding: 10px;
 }
 
-.section-header {
-    color: #f2b995;
-    margin: 10px;
-}
-
-.reflections-button {
-    display: inline-block;
-    background: none;
-    border: 1px solid black;
-}
-
-.hide-display {
-    display: none;
-}
-
-div {
-    padding: 10px;
-}
-
-button {
-    margin: 5px;
-}
-
 ul {
     list-style: none;
     margin: 0;
@@ -130,15 +130,22 @@ ul li {
     text-align: center;
 }
 
+
+/*****NAVIGATION *****/
+
 div.navigation-buttons {
-    display: inline-block;
-    text-align: right;
+    margin: 0 auto;
 }
 
 .nav-button {
     background: none;
-    border: 1px solid black;
+    border: none;
+    padding: 7px;
+    color: white;
 }
+
+
+/*****RESPONSIVE*****/
 
 .row {
     width: 1000px;

@@ -21,9 +21,12 @@ const {
 } = require('./users/router');
 const {
     router: authRouter,
+} = require('./auth/router');
+
+const {
     basicStrategy,
     jwtStrategy
-} = require('./auth/router');
+} = require('./auth/strategies');
 
 const app = express();
 
@@ -38,9 +41,9 @@ app.use(function (req, res, next) {
     next();
 });
 
-//app.use(passport.initialize());
-//passport.use(basicStrategy);
-//passport.use(jwtStrategy);
+app.use(passport.initialize());
+passport.use(basicStrategy);
+passport.use(jwtStrategy);
 
 app.use('/reflections/users/', usersRouter);
 app.use('/reflections/auth/', authRouter);
@@ -123,11 +126,6 @@ app.post('/reflections/new', (req, res) => {
 //update a reflection
 
 app.put('/reflections/:id', jsonParser, (req, res) => {
-    //    if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-    //        res.status(400).json({
-    //            error: 'Request path id and request body id values must match'
-    //        });
-    //    }
 
     const updated = {};
     const updateableFields = ['date', 'location', 'mood', 'text'];
