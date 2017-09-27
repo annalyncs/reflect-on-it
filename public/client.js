@@ -105,8 +105,8 @@ function displayReflections() {
             let reflectionInput = data.map(function (reflection, index) {
                 return `<div id="entries">
                         <input type="hidden" class="reflectionID" value="${reflection._id}">
-                        <p>Date: ${reflection.date}</p>
-                        <p>Location: ${reflection.location}</p>
+                        <p style="font-weight: 500; display: inline;">Date:</p> <p style="color: #898281; display: inline;">${reflection.date}</p><br><br>
+                        <p style="font-weight: 500; display: inline;">Location:</p> <p style="color: #898281; display: inline;"> ${reflection.location}</p><br><br>
                         <button id="edit-button" class="reflections-button">Edit</button>
                         <button id="delete-button" class="reflections-button">Delete</button>
                         <button id="current-button" class="reflections-button">View</button>
@@ -187,7 +187,7 @@ function retrieveReflection() {
                 $('#new-entry').html(`<form method="post" id="new-reflection">
                 <input type="hidden" class="reflectionID" value="${data._id}">
                 <fieldset>
-                <legend>Write a reflection</legend>
+                <legend style="color: #f2b995;">Write a reflection</legend>
                 <label>Date</label><br>
                 <input type="text" id="date" name="date" required value="${data.date}"><br>
                 <label>Location</label><br>
@@ -383,6 +383,9 @@ function createNewUser() {
             data: JSON.stringify(userInput),
             success: function (data) {
                 console.log('new user created');
+                $('#signup').addClass('hide-display');
+                $('#new-entry').removeClass('hide-display');
+                $('header').append('<p style="text-align:right; color: #898281;">Logged in as: ' + userInput.username + '</p><p style="text-align:right;"><a href="#">LOGOUT</a></p>')
             },
             failure: function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Self-Reflections</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto:400,500,700" rel="stylesheet">
     <link href="style.css" rel="stylesheet" />
 </head>
 
@@ -46,9 +46,9 @@
                 <input type="username" name="username" required>
                 <br><br>
                 <label for="password">Password</label>
-                <input type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+                <input type="password" name="password">
                 <br>
-                <input type="submit" id="login-button">
+                <button type="submit" id="login-button">Submit</button>
             </fieldset>
             </form>
         </span>
@@ -66,7 +66,7 @@
                 <label for="password">Password</label><br>
                 <input type="password" id="password-input" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
                 <br>
-                <input type="submit" id="signup-button">
+                <button type="submit" id="signup-button">Signup</button>
             </fieldset>
         </form>
         <a href="#" class="login-link">Login instead?</a>
@@ -75,7 +75,7 @@
     <section id="new-entry" class="hide-display row">
         <form method="post" id="new-reflection">
             <fieldset>
-                <legend>Write a reflection</legend>
+                <legend class="section-header">Write a reflection</legend>
                 <label>Date</label><br>
                 <input type="text" id="date" name="date" required><br>
                 <label>Location</label><br>
@@ -97,14 +97,14 @@
     </section>
 
     <section id="reflections-container" class="hide-display row">
-        <h1>Reflections</h1>
+        <h1 class="section-header">Reflections</h1>
 
         <div id="reflections">
         </div>
     </section>
 
     <section id="resources" class="hide-display row">
-        <h1>Resources</h1>
+        <h1 class="section-header">Resources</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae pharetra leo. Phasellus accumsan nunc ut mattis gravida. Etiam id dui vitae nulla aliquet fermentum. Sed aliquam malesuada rhoncus. Integer aliquet risus non ex sollicitudin, non consectetur neque commodo. Vestibulum efficitur risus at volutpat aliquet. Aenean placerat purus nibh, sed luctus lectus malesuada sed. Nullam feugiat euismod aliquam. Nunc consectetur imperdiet venenatis. Suspendisse eu leo quam. In aliquam velit a erat tempus efficitur. In ante libero, tempus sed euismod imperdiet, tristique id enim. In id lectus at ante consectetur venenatis.
 
         </p>
