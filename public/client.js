@@ -8,14 +8,19 @@ function clickLogin() {
         $('.start-page').addClass('hide-display');
         $('#login').removeClass('hide-display');
         $('#signup').addClass('hide-display');
+        $('form.signup-form :input').val("");
+        $('form.login-form :input').val("");
     });
 }
 
 function clickSignup() {
     $('.signup-link').click(function () {
+        console.log('sign up!');
         $('.start-page').addClass('hide-display');
         $('#signup').removeClass('hide-display');
         $('#login').addClass('hide-display');
+        $('form#signup :input').val("");
+        $('form#login :input').val("");
     });
 }
 
@@ -40,12 +45,13 @@ function postNewReflection() {
 
         let htmlOutput = "";
         $.ajax({
-            method: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify(dataInput),
-            url: NEW_REFLECTIONS_URL,
-            success: function (data) {
+                method: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(dataInput),
+                url: NEW_REFLECTIONS_URL
+            })
+            .done(function (data) {
                 console.log(data);
 
                 htmlOutput += '<div class="current-reflection">';
@@ -77,14 +83,13 @@ function postNewReflection() {
                 $('form#new-reflection :input').val("");
                 $('#new-entry').addClass('hide-display');
                 $('#reflections-container').removeClass('hide-display');
-            },
-            failure: function (jqXHR, error, errorThrown) {
+            })
+            .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
                 $('reflections').html('No entry submitted');
-            }
-        });
+            })
     });
 }
 
@@ -92,16 +97,14 @@ function postNewReflection() {
 //display all reflections
 function displayReflections() {
     $.ajax({
-        method: 'GET',
-        url: REFLECTIONS_URL,
-        success: function (data) {
+            method: 'GET',
+            url: REFLECTIONS_URL
+        })
+        .done(function (data) {
             if (data.length === 0) {
-                $('#reflections-container').html('<p>No reflections found!</p><br><button id="new-entry-button" class="reflections-button">Write a new entry!</button>');
-                $('#reflections').on('click', '#new-entry-button', function () {
-                    $('#new-entry').removeClass('hide-display');
-                });
-
+                $('#reflections-container').html('<p> No reflections found! </p>');
             };
+
             let reflectionInput = data.map(function (reflection, index) {
                 return `<div id="entries">
                         <input type="hidden" class="reflectionID" value="${reflection._id}">
@@ -113,61 +116,61 @@ function displayReflections() {
                         </div>`;
             });
             $('#reflections').html(reflectionInput);
-        },
-        failure: function (jqXHR, error, errorThrown) {
+        })
+        .fail(function (jqXHR, error, errorThrown) {
             console.log(jqXHR);
             console.log(error);
             console.log(errorThrown);
             $('reflections').html('No reflections found');
-        }
-    });
+        })
 }
 
 //display reflections by id
 function displayReflectionsById() {
-    let idParameter = $('#entries').find('.reflectionID').val();
-    console.log(idParameter);
-    $.ajax({
-        method: 'GET',
-        url: REFLECTIONS_URL + '/' + idParameter,
-        success: function (data) {
+    $('#reflections').on('click', '#current-button', function () {
+        let idParameter = $(this).parent().find('.reflectionID').val();
+        console.log(idParameter);
+        $.ajax({
+                method: 'GET',
+                url: REFLECTIONS_URL + '/' + idParameter
+            })
+            .done(function (data) {
+                let htmlOutput = "";
+                htmlOutput += '<div class="current-reflection">';
+                htmlOutput += '<input type="hidden" class="reflectionID" value="';
+                htmlOutput += data._id;
+                htmlOutput += '">';
+                htmlOutput += '<h2>Date:</h2>';
+                htmlOutput += '<p class="reflection-date">';
+                htmlOutput += data.date;
+                htmlOutput += '</p>';
+                htmlOutput += '<h2>Location:</h2>';
+                htmlOutput += '<p class="reflection-location">';
+                htmlOutput += data.location;
+                htmlOutput += '</p>';
+                htmlOutput += '<h2>Mood:</h2>';
+                htmlOutput += '<p class="reflection-mood">';
+                htmlOutput += data.mood;
+                htmlOutput += '</p>';
+                htmlOutput += '<h2>Reflection:</h2>';
+                htmlOutput += '<p class="reflection-text">';
+                htmlOutput += data.text;
+                htmlOutput += '</p>';
+                htmlOutput += '</div>';
+                htmlOutput += '<button id="edit-button" class="reflections-button">Edit</button>';
+                htmlOutput += '<button id="delete-button" class="reflections-button">Delete</button>';
+                htmlOutput += '<button id="view-all-button" class="reflections-button">View All</button>';
 
-            let htmlOutput = "";
-            htmlOutput += '<div class="current-reflection">';
-            htmlOutput += '<input type="hidden" class="reflectionID" value="';
-            htmlOutput += data._id;
-            htmlOutput += '">';
-            htmlOutput += '<h2>Date:</h2>';
-            htmlOutput += '<p class="reflection-date">';
-            htmlOutput += data.date;
-            htmlOutput += '</p>';
-            htmlOutput += '<h2>Location:</h2>';
-            htmlOutput += '<p class="reflection-location">';
-            htmlOutput += data.location;
-            htmlOutput += '</p>';
-            htmlOutput += '<h2>Mood:</h2>';
-            htmlOutput += '<p class="reflection-mood">';
-            htmlOutput += data.mood;
-            htmlOutput += '</p>';
-            htmlOutput += '<h2>Reflection:</h2>';
-            htmlOutput += '<p class="reflection-text">';
-            htmlOutput += data.text;
-            htmlOutput += '</p>';
-            htmlOutput += '</div>';
-            htmlOutput += '<button id="edit-button" class="reflections-button">Edit</button>';
-            htmlOutput += '<button id="delete-button" class="reflections-button">Delete</button>';
-            htmlOutput += '<button id="view-all-button" class="reflections-button">View All</button>';
-
-            $('#reflections').html(htmlOutput);
-        },
-        failure: function (jqXHR, error, errorThrown) {
-            console.log(jqXHR);
-            console.log(error);
-            console.log(errorThrown);
-            $('reflections').html('No reflections found');
-            $('#new-entry').removeClass('hide-display');
-        }
-    });
+                $('#reflections').html(htmlOutput);
+            })
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+                $('reflections').html('No reflections found');
+                $('#new-entry').removeClass('hide-display');
+            })
+    })
 }
 
 //update the selected reflection
@@ -179,10 +182,11 @@ function retrieveReflection() {
         let idParameter = $(this).parent().find('.reflectionID').val();
         console.log(idParameter);
         $.ajax({
-            method: 'GET',
-            url: REFLECTIONS_URL + '/' + idParameter,
-            contentType: 'application/json',
-            success: function (data) {
+                method: 'GET',
+                url: REFLECTIONS_URL + '/' + idParameter,
+                contentType: 'application/json'
+            })
+            .done(function (data) {
                 console.log(data);
                 $('#new-entry').html(`<form method="post" id="new-reflection">
                 <input type="hidden" class="reflectionID" value="${data._id}">
@@ -205,14 +209,13 @@ function retrieveReflection() {
                 <button type="submit" id="update-button">Update</button>
                 </fieldset>
                 </form>`)
-            },
-            failure: function (jqXHR, error, errorThrown) {
+            })
+            .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
                 $('reflections').html('No reflections found');
-            }
-        });
+            })
     });
 }
 
@@ -233,12 +236,13 @@ function updateReflection() {
     let htmlOutput = "";
 
     $.ajax({
-        method: 'PUT',
-        url: REFLECTIONS_URL + '/' + idParameter,
-        contentType: 'application/json',
-        dataType: 'json',
-        data: JSON.stringify(newDataInput),
-        success: function (data) {
+            method: 'PUT',
+            url: REFLECTIONS_URL + '/' + idParameter,
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(newDataInput)
+        })
+        .done(function (data) {
             console.log(newDataInput);
             htmlOutput += '<div class="current-reflection">';
             htmlOutput += '<input type="hidden" class="reflectionID" value="';
@@ -268,60 +272,49 @@ function updateReflection() {
             $('#reflections').html(htmlOutput);
             $('#new-entry').addClass('hide-display');
             $('#reflections-container').removeClass('hide-display');
-        },
-        failure: function (jqXHR, error, errorThrown) {
+        })
+        .fail(function (jqXHR, error, errorThrown) {
             console.log(jqXHR);
             console.log(error);
             console.log(errorThrown);
             $('reflections').html('No reflections found');
-        }
-    })
+        })
 }
-
 
 //delete selected reflection
 function deleteReflection() {
     let idParameter = $('div').find('.reflectionID').val();
     console.log(idParameter);
     $.ajax({
-        method: 'DELETE',
-        url: REFLECTIONS_URL + '/' + idParameter,
-        contentType: 'application/json',
-        dataType: 'json',
-        success: function (data) {
+            method: 'DELETE',
+            url: REFLECTIONS_URL + '/' + idParameter,
+            contentType: 'application/json',
+            dataType: 'json'
+        })
+        .done(function (data) {
             console.log('deleting reflection');
             displayReflections();
-        },
-        failure: function (jqXHR, error, errorThrown) {
+        })
+        .fail(function (jqXHR, error, errorThrown) {
             console.log(jqXHR);
             console.log(error);
             console.log(errorThrown);
             $('reflections').html('No reflections found');
             $('#new-entry').removeClass('hide-display');
-        }
-    })
-};
+        })
+}
 
 
 function handleDisplayReflections() {
     $('#reflections').on('click', '#view-all-button', function () {
         displayReflections();
-        $('.main-buttons').addClass('hide-display');
         $('.current-reflection').addClass('hide-display');
-    });
-}
-
-function handleDisplayReflectionsById() {
-    $('#reflections').on('click', '#current-button', function () {
-        displayReflectionsById();
-        $('.main-buttons').removeClass('hide-display');
     });
 }
 
 function handleDeleteReflections() {
     $('#reflections-container').on('click', '#delete-button', function () {
         deleteReflection();
-        $('.main-buttons').addClass('hide-display');
     });
 }
 
@@ -337,10 +330,28 @@ function handleUpdateReflection() {
 function handleNavCreateButton() {
     $('#nav-create-button').click(function () {
         $('form#new-reflection :input').val("");
-        $('#new-entry').removeClass('hide-display');
+        $('#new-entry').removeClass('hide-display').html(` <form method="post" id="new-reflection">
+            <fieldset>
+            <legend class="section-header">Write a reflection</legend>
+            <label>Date</label><br>
+            <input type="text" id="date" name="date" required><br>
+            <label>Location</label><br>
+            <input type="text" id="location" name="location" required><br>
+            <label>Mood</label><br>
+            <select name="mood" id="mood"><br>
+            <option>Happy</option>
+            <option>Calm</option>
+            <option>Angry/Frustrated</option>
+            <option>Anxious</option>
+            <option>Sad/Upset/Depressed</option>
+            </select><br>
+            <label>Reflect on it:</label><br>
+            <textarea name="text" id="text" required></textarea><br>
+            <button type="submit" id="new-submit-button">Submit</button>
+            </fieldset>`);
         $('#reflections-container').addClass('hide-display');
         $('#resources').addClass('hide-display');
-
+        postNewReflection();
     })
 }
 
@@ -376,28 +387,31 @@ function createNewUser() {
             'password': passwordInput
         };
         $.ajax({
-            url: USER_URL,
-            method: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify(userInput),
-            success: function (data) {
+                url: USER_URL,
+                method: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(userInput)
+            })
+            .done(function (data) {
                 console.log('new user created');
                 $('#signup').addClass('hide-display');
                 $('.navigation-buttons').removeClass('hide-display');
                 $('#new-entry').removeClass('hide-display');
                 $('header').append('<p style="text-align:right; color: #898281;" class="logged-in-as">Logged in as: ' + userInput.username + '</p><p style="text-align:right;"><a href="#" class="logout">LOGOUT</a></p>')
-                $('form#signup :input').val("");
-                $('form#login :input').val("");
-            },
-            failure: function (jqXHR, error, errorThrown) {
+                $('form.signup-form :input').val("");
+                $('form.login-form :input').val("");
+            })
+            .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
-            }
-        })
+                console.log(jqXHR.responseText);
+                $('#signup').append('<p class="error">' + jqXHR.responseJSON.message + '<p>');
+            });
     })
 }
+
 
 //login to app
 function loginApp() {
@@ -405,31 +419,32 @@ function loginApp() {
     let usernameInput = $(this).parent().find('#username-input').val();
     let passwordInput = $(this).parent().find('#password-input').val();
 
-    let userInput = {
-        'username': usernameInput,
-        'name': nameInput,
-        'password': passwordInput
-    };
     $('#login-button').click(function (e) {
         e.preventDefault();
         console.log('logging in');
         $.ajax({
-            url: USER_AUTH_URL,
-            method: 'POST',
-            username: usernameInput,
-            password: passwordInput,
-            success: function (data) {
+                url: USER_AUTH_URL,
+                method: 'POST',
+                username: usernameInput,
+                password: passwordInput
+            })
+            .done(function (data) {
                 console.log('success');
+                console.log(data);
                 $('#login').addClass('hide-display');
                 $('.navigation-buttons').removeClass('hide-display');
                 $('#new-entry').removeClass('hide-display');
-                $('header').append('<p style="text-align:right; color: #898281;" class="logged-in-as">Logged in as: ' + userInput.username + '</p><p style="text-align:right;"><a href="#" class="logout">LOGOUT</a></p>')
+                $('header').append('<p style="text-align:right; color: #898281;" class="logged-in-as">Logged in as: ' + usernameInput + '</p><p style="text-align:right;"><a href="#" class="logout">LOGOUT</a></p>')
                 $('form#signup :input').val("");
                 $('form#signup :input').val("");
                 $('form#login :input').val("");
                 $('.navigation-buttons').removeClass('hide-display');
-            }
-        });
+            })
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
     });
 }
 
@@ -450,8 +465,8 @@ $(function () {
     postNewReflection();
     handleDeleteReflections();
     handleDisplayReflections();
-    handleDisplayReflectionsById();
     retrieveReflection();
+    displayReflectionsById()
     handleUpdateReflection();
     handleNavCreateButton();
     handleNavViewButton();

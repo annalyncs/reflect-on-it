@@ -54,16 +54,13 @@ app.use(bodyParser.json());
 
 //a protected endpoint
 app.get(
-    '/api/protected',
+    '/reflections/protected',
     passport.authenticate('jwt', {
         session: false
     }),
     (req, res) => {
-        return res.json({
-            data: 'protected'
-        });
-    }
-);
+        res.send('It Worked!');
+    });
 
 //retrieve all reflections from the database
 app.get('/reflections', (req, res) => {

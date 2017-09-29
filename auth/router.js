@@ -27,6 +27,10 @@ router.post(
         res.json({
             authToken
         });
+        res.json({
+            success: true,
+            token: 'Header ' + authToken
+        });
     }
 );
 

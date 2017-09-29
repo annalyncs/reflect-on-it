@@ -78,39 +78,39 @@ describe('index page', function () {
 });
 
 
-//describe('GET endpoint', function () {
-//    it('should retrieve all reflections', function () {
-//        let res;
-//        return chai.request(app)
-//            .get('/reflections')
-//            .then(function (_res) {
-//                res = _res;
-//                res.should.have.status(200);
-//                res.body.reflections.should.have.length.of.at.least(1);
-//                return Reflection.count();
-//            })
-//            .then(function (count) {
-//                res.body.reflections.should.have.length.of(count);
-//            });
-//    });
-//
-//    it('should retrieve reflection by id', function () {
-//        return Reflection
-//            .findOne()
-//            .then(function (reflection) {
-//                reflectionID = reflection.id;
-//
-//                return chai.request(app)
-//                    .get('/restaurants/reflectionID')
-//                    .then(function (res) {
-//                        res.should.have.status(200);
-//                        res.should.be.json;
-//                        res.body.reflections.should.have.length.of.at.least(1);
-//                    });
-//            });
-//    });
-//});
-//
+describe('GET endpoint', function () {
+    it('should retrieve all reflections', function () {
+        let res;
+        return chai.request(app)
+            .get('/reflections')
+            .then(function (_res) {
+                res = _res;
+                res.should.have.status(200);
+                res.body.reflections.should.have.length.of.at.least(1);
+                return Reflection.count();
+            })
+            .then(function (count) {
+                res.body.reflections.should.have.length.of(count);
+            });
+    });
+
+    it('should retrieve reflection by id', function () {
+        return Reflection
+            .findOne()
+            .then(function (reflection) {
+                reflectionID = reflection.id;
+
+                return chai.request(app)
+                    .get('/restaurants/reflectionID')
+                    .then(function (res) {
+                        res.should.have.status(200);
+                        res.should.be.json;
+                        res.body.reflections.should.have.length.of.at.least(1);
+                    });
+            });
+    });
+});
+
 //describe('POST endpoint', function () {
 //    it('should post a new reflection', function () {
 //        const newReflection = generateReflectionData();
