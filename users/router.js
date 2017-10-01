@@ -79,8 +79,8 @@ router.post('/', jsonParser, (req, res) => {
             code: 422,
             reason: 'ValidationError',
             message: tooSmallField ?
-                `Password must be at least ${sizedFields[tooSmallField]
-            .min} characters long` : `Must be at most ${sizedFields[tooLargeField]
+                `${tooSmallField}. must be at least ${sizedFields[tooSmallField]
+            .min} characters long` : ` ${tooLargeField} must be at most ${sizedFields[tooLargeField]
             .max} characters long`,
             location: tooSmallField || tooLargeField
         });

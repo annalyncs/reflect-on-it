@@ -1,6 +1,6 @@
 let REFLECTIONS_URL = '/reflections';
 let NEW_REFLECTIONS_URL = '/reflections/new';
-let USER_URL = '/reflections/users/';
+let USER_URL = '/reflections/register/';
 let USER_AUTH_URL = '/reflections/auth/login';
 
 function clickLogin() {
@@ -415,18 +415,19 @@ function createNewUser() {
 
 //login to app
 function loginApp() {
-    let nameInput = $(this).parent().find('#name-input').val();
-    let usernameInput = $(this).parent().find('#username-input').val();
-    let passwordInput = $(this).parent().find('#password-input').val();
-
     $('#login-button').click(function (e) {
         e.preventDefault();
         console.log('logging in');
+
+        let usernameInput = $(this).parent().find('#login-username').val();
+        let passwordInput = $(this).parent().find('#login-password').val();
+
         $.ajax({
                 url: USER_AUTH_URL,
                 method: 'POST',
-                username: usernameInput,
-                password: passwordInput
+                headers: {
+                    'Authorization': 'Basic ' + btoa(usernameInput + ':' + passwordInput)
+                }
             })
             .done(function (data) {
                 console.log('success');
@@ -435,9 +436,8 @@ function loginApp() {
                 $('.navigation-buttons').removeClass('hide-display');
                 $('#new-entry').removeClass('hide-display');
                 $('header').append('<p style="text-align:right; color: #898281;" class="logged-in-as">Logged in as: ' + usernameInput + '</p><p style="text-align:right;"><a href="#" class="logout">LOGOUT</a></p>')
-                $('form#signup :input').val("");
-                $('form#signup :input').val("");
-                $('form#login :input').val("");
+                $('form.signup-form :input').val("");
+                $('form.login-form :input').val("");
                 $('.navigation-buttons').removeClass('hide-display');
             })
             .fail(function (jqXHR, error, errorThrown) {
@@ -458,6 +458,22 @@ function logoutApp() {
         $('.logged-in-as').addClass('hide-display');
         $('#login').removeClass('hide-display');
         $('.logout').addClass('hide-display');
+    })
+}
+
+function testAuth() {
+    $('#nav-resources-button').click(function () {
+        console.log('clicked resources');
+        $.ajax({
+                url: '/api/protected/',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer' + authToken
+                }
+            })
+            .done(function () {
+                console.log('succcccccesss');
+            })
     })
 }
 

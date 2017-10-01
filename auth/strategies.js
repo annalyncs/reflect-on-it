@@ -2,9 +2,10 @@ const passport = require('passport');
 const {
     BasicStrategy
 } = require('passport-http');
-
-const JwtStrategy = require('passport-jwt').Strategy,
-    ExtractJwt = require('passport-jwt').ExtractJwt;
+const {
+    Strategy: JwtStrategy,
+    ExtractJwt
+} = require('passport-jwt');
 
 const {
     User

@@ -45,22 +45,24 @@ app.use(passport.initialize());
 passport.use(basicStrategy);
 passport.use(jwtStrategy);
 
-app.use('/reflections/users/', usersRouter);
+app.use('/reflections/register/', usersRouter);
 app.use('/reflections/auth/', authRouter);
 
 app.use(express.static('public'));
 app.use(morgan('common'));
 app.use(bodyParser.json());
 
+
 //a protected endpoint
 app.get(
-    '/reflections/protected',
+    '/api/protected',
     passport.authenticate('jwt', {
         session: false
     }),
     (req, res) => {
-        res.send('It Worked!');
-    });
+        res.send('It Works!');
+    }
+);
 
 //retrieve all reflections from the database
 app.get('/reflections', (req, res) => {

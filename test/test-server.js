@@ -111,79 +111,79 @@ describe('GET endpoint', function () {
     });
 });
 
-//describe('POST endpoint', function () {
-//    it('should post a new reflection', function () {
-//        const newReflection = generateReflectionData();
-//
-//        return chai.request(app)
-//            .post('restaurants/new')
-//            .send(newReflection)
-//            .then(function (res) {
-//                res.should.have.status(201);
-//                res.should.be.json;
-//                res.body.should.be.a('object');
-//                res.body.should.include.keys('id', 'date', 'location', 'mood', 'text');
-//                res.body.date.should.equal(newReflection.date);
-//                res.body.id.should.not.be.null;
-//                res.body.location.should.equal(newReflection.location);
-//                res.body.mood.should.equal(newReflection.mood);
-//                res.body.text.should.equal(newReflection.text);
-//                return Reflection.findById(res.body.id);
-//            })
-//            .then(function (reflection) {
-//                reflection.date.should.equal(newReflection.date);
-//                reflection.location.should.equal(newReflection.location);
-//                reflection.mood.should.equal(newReflection.mood);
-//                reflection.text.should.equal(newReflection.text);
-//            });
-//    });
-//});
-//
-//describe('PUT endpoint', function () {
-//    it('should update reflection', function () {
-//        const updateData = {
-//            date: '09 / 25 / 2017',
-//            mood: 'sad'
-//        };
-//
-//        return Reflection
-//            .findOne()
-//            .then(function (reflection) {
-//                updateData.id = reflection.id;
-//
-//                return chai.request(app)
-//                    .put(`/reflections/${reflection.id}`)
-//                    .send(updateData)
-//            })
-//            .then(function (res) {
-//                res.should.have.status(204);
-//
-//                return Reflection.findById(updateData.id);
-//            })
-//            .then(function (reflection) {
-//                reflection.date.should.equal(updateData.date);
-//                reflection.mood.should.equal(updateData.date);
-//            });
-//    });
-//});
-//
-//describe('DELETE endpoint', function () {
-//    it('should delete a reflection by id', function () {
-//        let reflection;
-//
-//        return Reflection
-//            .findOne()
-//            .then(function (_reflection) {
-//                reflection = _reflection;
-//                return chai.request(app)
-//                    .delete(`/reflections/${reflection.id}`);
-//            })
-//            .then(function (res) {
-//                res.should.have.status(204);
-//                return Reflection.findById(reflection.id);
-//            })
-//            .then(function (_reflection) {
-//                should.not.exist(_reflection);
-//            });
-//    });
-//});
+describe('POST endpoint', function () {
+    it('should post a new reflection', function () {
+        const newReflection = generateReflectionData();
+
+        return chai.request(app)
+            .post('restaurants/new')
+            .send(newReflection)
+            .then(function (res) {
+                res.should.have.status(201);
+                res.should.be.json;
+                res.body.should.be.a('object');
+                res.body.should.include.keys('id', 'date', 'location', 'mood', 'text');
+                res.body.date.should.equal(newReflection.date);
+                res.body.id.should.not.be.null;
+                res.body.location.should.equal(newReflection.location);
+                res.body.mood.should.equal(newReflection.mood);
+                res.body.text.should.equal(newReflection.text);
+                return Reflection.findById(res.body.id);
+            })
+            .then(function (reflection) {
+                reflection.date.should.equal(newReflection.date);
+                reflection.location.should.equal(newReflection.location);
+                reflection.mood.should.equal(newReflection.mood);
+                reflection.text.should.equal(newReflection.text);
+            });
+    });
+});
+
+describe('PUT endpoint', function () {
+    it('should update reflection', function () {
+        const updateData = {
+            date: '09 / 25 / 2017',
+            mood: 'sad'
+        };
+
+        return Reflection
+            .findOne()
+            .then(function (reflection) {
+                updateData.id = reflection.id;
+
+                return chai.request(app)
+                    .put(`/reflections/${reflection.id}`)
+                    .send(updateData)
+            })
+            .then(function (res) {
+                res.should.have.status(204);
+
+                return Reflection.findById(updateData.id);
+            })
+            .then(function (reflection) {
+                reflection.date.should.equal(updateData.date);
+                reflection.mood.should.equal(updateData.date);
+            });
+    });
+});
+
+describe('DELETE endpoint', function () {
+    it('should delete a reflection by id', function () {
+        let reflection;
+
+        return Reflection
+            .findOne()
+            .then(function (_reflection) {
+                reflection = _reflection;
+                return chai.request(app)
+                    .delete(`/reflections/${reflection.id}`);
+            })
+            .then(function (res) {
+                res.should.have.status(204);
+                return Reflection.findById(reflection.id);
+            })
+            .then(function (_reflection) {
+                should.not.exist(_reflection);
+            });
+    });
+});
