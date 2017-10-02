@@ -432,6 +432,8 @@ function loginApp() {
             .done(function (data) {
                 console.log('success');
                 console.log(data);
+                localStorage.setItem('token', data.authToken);
+
                 $('#login').addClass('hide-display');
                 $('.navigation-buttons').removeClass('hide-display');
                 $('#new-entry').removeClass('hide-display');
@@ -468,11 +470,12 @@ function testAuth() {
                 url: '/api/protected/',
                 method: 'GET',
                 headers: {
-                    'Authorization': 'Bearer' + authToken
+                    "Authorization": localStorage.getItem('token')
                 }
             })
             .done(function () {
                 console.log('succcccccesss');
+                console.log(authToken);
             })
     })
 }
@@ -492,4 +495,5 @@ $(function () {
     clickLogin();
     clickSignup();
     logoutApp();
+    testAuth();
 })

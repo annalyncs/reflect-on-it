@@ -30,6 +30,20 @@ const {
 
 const app = express();
 
+app.use(passport.initialize());
+passport.use(basicStrategy);
+passport.use(jwtStrategy);
+
+app.use('/reflections/register/', usersRouter);
+app.use('/reflections/auth/', authRouter);
+
+app.use(express.static('public'));
+app.use(morgan('common'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
 // CORS
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -41,18 +55,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(passport.initialize());
-passport.use(basicStrategy);
-passport.use(jwtStrategy);
-
-app.use('/reflections/register/', usersRouter);
-app.use('/reflections/auth/', authRouter);
-
-app.use(express.static('public'));
-app.use(morgan('common'));
-app.use(bodyParser.json());
-
-
 //a protected endpoint
 app.get(
     '/api/protected',
@@ -61,8 +63,8 @@ app.get(
     }),
     (req, res) => {
         res.send('It Works!');
-    }
-);
+    });
+
 
 //retrieve all reflections from the database
 app.get('/reflections', (req, res) => {
