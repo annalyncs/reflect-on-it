@@ -129,7 +129,7 @@ ul {
     overflow: hidden;
 }
 
-ul li {
+navigation ul li {
     display: inline;
     text-align: center;
 }

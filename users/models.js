@@ -7,7 +7,7 @@ const UserSchema = mongoose.Schema({
     username: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     password: {
         type: String,
@@ -15,7 +15,7 @@ const UserSchema = mongoose.Schema({
     },
     name: {
         type: String,
-        default: ''
+        default: '',
     },
 }, {
     collection: 'users'

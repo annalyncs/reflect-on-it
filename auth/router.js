@@ -23,9 +23,9 @@ router.post(
         session: false
     }),
     (req, res) => {
-        const authToken = createAuthToken(req.user.apiRepr());
+        const token = createAuthToken(req.user.apiRepr());
         res.json({
-            authToken
+            token
         });
     }
 );

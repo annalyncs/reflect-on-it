@@ -56,15 +56,50 @@ app.use(function (req, res, next) {
 });
 
 //a protected endpoint
-app.get(
-    '/api/protected',
-    passport.authenticate('jwt', {
-        session: false
-    }),
-    (req, res) => {
-        res.send('It Works!');
-    });
+app.get('/dashboard', passport.authenticate('jwt', {
+    session: false
+}), function (req, res) {
+    var token = getToken(req.headers);
+    if (token) {
+        var decode = jwt.decode(token, config.secret);
+        User.findOne({
+            name: decode.name
+        }, function (err, user) {
+            if (err) {
+                res.json(err)
+            }
+            if (!user) {
+                return res.status(403).send({
+                    success: false,
+                    msg: 'Authentication Failed'
+                })
+            } else {
+                res.json({
+                    success: true,
+                })
+            }
+        })
+    } else {
+        return res.status(403).send({
+            success: false,
+            msg: 'No Token Found'
+        })
+    }
 
+});
+
+getToken = function (headers) {
+    if (headers && headers.authorization) {
+        var parted = headers.authorization.split(' ');
+        if (parted.length === 2) {
+            return parted[1];
+        } else {
+            return null;
+        }
+    } else {
+        return null;
+    }
+};
 
 //retrieve all reflections from the database
 app.get('/reflections', (req, res) => {
