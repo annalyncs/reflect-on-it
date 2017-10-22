@@ -1,27 +1,11 @@
 let REFLECTIONS_URL = '/reflections';
 let NEW_REFLECTIONS_URL = '/reflections/new';
-let USER_URL = '/reflections/register/';
-let USER_AUTH_URL = '/reflections/auth/login';
 
-function clickLogin() {
-    $('.login-link').click(function () {
+function handleNewEntryButton() {
+    $('#nav-create-button').on('click', function () {
+        $('#new-entry').removeClass('hide-display');
         $('.start-page').addClass('hide-display');
-        $('#login').removeClass('hide-display');
-        $('#signup').addClass('hide-display');
-        $('form.signup-form :input').val("");
-        $('form.login-form :input').val("");
-    });
-}
-
-function clickSignup() {
-    $('.signup-link').click(function () {
-        console.log('sign up!');
-        $('.start-page').addClass('hide-display');
-        $('#signup').removeClass('hide-display');
-        $('#login').addClass('hide-display');
-        $('form#signup :input').val("");
-        $('form#login :input').val("");
-    });
+    })
 }
 
 
@@ -108,8 +92,9 @@ function displayReflections() {
             let reflectionInput = data.map(function (reflection, index) {
                 return `<div id="entries">
                         <input type="hidden" class="reflectionID" value="${reflection._id}">
-                        <p style="font-weight: 500; display: inline;">Date:</p> <p style="color: #898281; display: inline;">${reflection.date}</p><br><br>
-                        <p style="font-weight: 500; display: inline;">Location:</p> <p style="color: #898281; display: inline;"> ${reflection.location}</p><br><br>
+                        <p class="reflection-info">Date:</p> <p class="reflection-text">${reflection.date}</p><br><br>
+                        <p class="reflection-info">Location:</p> <p class="reflection-text"> ${reflection.location}</p><br><br>
+                        <p class="reflection-info">Entry:</p> <p class="reflection-text"> ${reflection.text}</p><br><br>
                         <button id="edit-button" class="reflections-button">Edit</button>
                         <button id="delete-button" class="reflections-button">Delete</button>
                         <button id="current-button" class="reflections-button">View</button>
@@ -361,6 +346,7 @@ function handleNavViewButton() {
         $('#reflections-container').removeClass('hide-display');
         $('#new-entry').addClass('hide-display');
         $('#resources').addClass('hide-display');
+        $('.start-page').addClass('hide-display');
     })
 }
 
@@ -369,116 +355,10 @@ function handleNavResourcesButton() {
         $('#resources').removeClass('hide-display');
         $('#new-entry').addClass('hide-display');
         $('#reflections-container').addClass('hide-display');
+        $('.start-page').addClass('hide-display');
     })
 }
 
-
-//post a new user to database
-function createNewUser() {
-    $('#signup-button').click(function (e) {
-        e.preventDefault();
-        let nameInput = $(this).parent().find('#name-input').val();
-        let usernameInput = $(this).parent().find('#username-input').val();
-        let passwordInput = $(this).parent().find('#password-input').val();
-
-        let userInput = {
-            'username': usernameInput,
-            'name': nameInput,
-            'password': passwordInput
-        };
-        $.ajax({
-                url: USER_URL,
-                method: 'POST',
-                dataType: 'json',
-                contentType: 'application/json',
-                data: JSON.stringify(userInput)
-            })
-            .done(function (data) {
-                console.log('new user created');
-                $('#signup').addClass('hide-display');
-                $('.navigation-buttons').removeClass('hide-display');
-                $('#new-entry').removeClass('hide-display');
-                $('header').append('<p style="text-align:right; color: #898281;" class="logged-in-as">Logged in as: ' + userInput.username + '</p><p style="text-align:right;"><a href="#" class="logout">LOGOUT</a></p>')
-                $('form.signup-form :input').val("");
-                $('form.login-form :input').val("");
-            })
-            .fail(function (jqXHR, error, errorThrown) {
-                console.log(jqXHR);
-                console.log(error);
-                console.log(errorThrown);
-                console.log(jqXHR.responseText);
-                $('#signup').append('<p class="error">' + jqXHR.responseJSON.message + '<p>');
-            });
-    })
-}
-
-
-//login to app
-function loginApp() {
-    $('#login-button').click(function (e) {
-        e.preventDefault();
-        console.log('logging in');
-
-        let usernameInput = $(this).parent().find('#login-username').val();
-        let passwordInput = $(this).parent().find('#login-password').val();
-
-        $.ajax({
-                url: USER_AUTH_URL,
-                method: 'POST',
-                headers: {
-                    'Authorization': 'Basic ' + btoa(usernameInput + ':' + passwordInput)
-                }
-            })
-            .done(function (data) {
-                console.log('success');
-                console.log(data);
-                localStorage.setItem('token', data.authToken);
-
-                $('#login').addClass('hide-display');
-                $('.navigation-buttons').removeClass('hide-display');
-                $('#new-entry').removeClass('hide-display');
-                $('header').append('<p style="text-align:right; color: #898281;" class="logged-in-as">Logged in as: ' + usernameInput + '</p><p style="text-align:right;"><a href="#" class="logout">LOGOUT</a></p>')
-                $('form.signup-form :input').val("");
-                $('form.login-form :input').val("");
-                $('.navigation-buttons').removeClass('hide-display');
-            })
-            .fail(function (jqXHR, error, errorThrown) {
-                console.log(jqXHR);
-                console.log(error);
-                console.log(errorThrown);
-            });
-    });
-}
-
-//logout
-function logoutApp() {
-    $('header').on('click', '.logout', function () {
-        $('#signup').addClass('hide-display');
-        $('#new-entry').addClass('hide-display');
-        $('#reflections').addClass('hide-display');
-        $('#resources').addClass('hide-display');
-        $('.logged-in-as').addClass('hide-display');
-        $('#login').removeClass('hide-display');
-        $('.logout').addClass('hide-display');
-    })
-}
-
-function testAuth() {
-    $('#nav-resources-button').click(function () {
-        console.log('clicked resources');
-        $.ajax({
-                url: '/api/protected/',
-                method: 'GET',
-                headers: {
-                    "Authorization": localStorage.getItem('token')
-                }
-            })
-            .done(function () {
-                console.log('succcccccesss');
-                console.log(authToken);
-            })
-    })
-}
 
 $(function () {
     postNewReflection();
@@ -489,11 +369,6 @@ $(function () {
     handleUpdateReflection();
     handleNavCreateButton();
     handleNavViewButton();
-    handleNavResourcesButton()
-    createNewUser();
-    loginApp();
-    clickLogin();
-    clickSignup();
-    logoutApp();
-    testAuth();
+    handleNavResourcesButton();
+    handleNewEntryButton();
 })
