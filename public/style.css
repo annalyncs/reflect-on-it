@@ -32,6 +32,14 @@ a:visited {
     color: #7e9a9a;
 }
 
+button {
+    margin: 5px;
+    background: white;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #b1cbbb;
+}
+
 .reflections-button {
     display: inline-block;
     background: none;
@@ -40,10 +48,6 @@ a:visited {
 
 div {
     padding: 10px;
-}
-
-button {
-    margin: 5px;
 }
 
 section {
@@ -176,8 +180,16 @@ div.navigation-buttons {
 
 #entries {
     border: 1px solid #898281;
+    background: rgba(177, 203, 187, 0.2);
     border-radius: 15px 0 15px 0;
     margin: 15px;
+}
+
+#entries button {
+    background: white;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #b1cbbb;
 }
 
 .current-reflection h2 {
