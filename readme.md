@@ -19,7 +19,7 @@ The initial wireframes for the page and the list of results can be seen below.
 ![Wire Frame](https://github.com/annalyncs/self-reflections/blob/master/screenshots/wireframes.jpeg?raw=true)
 
 ## Working Prototype
-You can find Anonymous Self Reflections at
+You can find Anonymous Self Reflections at https://desolate-sands-95569.herokuapp.com/
 
 ## Technology
 
