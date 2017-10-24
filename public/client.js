@@ -176,7 +176,7 @@ function retrieveReflection() {
                 $('#new-entry').html(`<form method="post" id="new-reflection">
                 <input type="hidden" class="reflectionID" value="${data._id}">
                 <fieldset>
-                <legend style="color: #f2b995;">Write a reflection</legend>
+                <legend style="color: #b1cbbb;">Write a reflection</legend>
                 <label>Date</label><br>
                 <input type="text" id="date" name="date" required value="${data.date}"><br>
                 <label>Location</label><br>
