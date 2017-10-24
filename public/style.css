@@ -171,7 +171,8 @@ div.navigation-buttons {
 
 #entries {
     border: 1px solid #898281;
-    margin: 8px;
+    border-radius: 15px 0 15px 0;
+    margin: 15px;
 }
 
 .current-reflection h2 {
