@@ -19,6 +19,11 @@ legend {
     font-size: 32px;
 }
 
+section h1,
+fieldset legend {
+    text-align: center;
+}
+
 h2 {
     color: #b1cbbb;
 }
@@ -54,12 +59,15 @@ section {
     margin: 30px;
     padding: 10px;
     background: white;
-    text-align: center;
 }
 
 .section-header {
     color: #b1cbbb;
     margin: 10px;
+}
+
+.start-page {
+    text-align: center;
 }
 
 .start-page p {
@@ -75,7 +83,7 @@ section {
 /*****HEADER*****/
 
 header h1 {
-    font-size: 40px;
+    font-size: 36px;
     color: #7e9a9a;
     margin-bottom: 1px;
 }
@@ -105,17 +113,13 @@ form fieldset {
     margin: 20px;
 }
 
-.login,
-.signup {
-    text-align: center;
-}
-
-form label {
-    text-align: justify;
+fieldset label {
+    text-align: left;
 }
 
 label {
-    margin: 10px;
+    margin: 20px;
+    padding: 5px;
     font-weight: 500;
 }
 
@@ -123,6 +127,11 @@ input,
 select,
 textarea {
     margin: 15px;
+}
+
+textarea {
+    width: 600px;
+    height: 300px;
 }
 
 fieldset {
@@ -143,11 +152,6 @@ navigation ul li {
 
 .start-page p {
     margin-bottom: 50px;
-}
-
-textarea {
-    width: 300px;
-    height: 150px;
 }
 
 
@@ -183,6 +187,7 @@ div.navigation-buttons {
     background: rgba(177, 203, 187, 0.2);
     border-radius: 15px 0 15px 0;
     margin: 15px;
+    padding: 20px;
 }
 
 #entries button,

@@ -91,6 +91,7 @@ function displayReflections() {
                         <input type="hidden" class="reflectionID" value="${reflection._id}">
                         <p class="reflection-info">Date:</p> <p class="reflection-text">${reflection.date}</p><br><br>
                         <p class="reflection-info">Location:</p> <p class="reflection-text"> ${reflection.location}</p><br><br>
+                        <p class="reflection-info">Mood:</p> <p class="reflection-text"> ${reflection.mood}</p><br><br>
                         <p class="reflection-info">Entry:</p> <p class="reflection-text"> ${reflection.text}</p><br><br>
                         <button id="edit-button" class="reflections-button">Edit</button>
                         <button id="delete-button" class="reflections-button">Delete</button>
@@ -171,11 +172,11 @@ function retrieveReflection() {
                 <input type="hidden" class="reflectionID" value="${data._id}">
                 <fieldset>
                 <legend style="color: #b1cbbb;">Write a reflection</legend>
-                <label>Date</label><br>
+                <label>Date:</label><br>
                 <input type="text" id="date" name="date" required value="${data.date}"><br>
-                <label>Location</label><br>
+                <label>Location:</label><br>
                 <input type="text" id="location" name="location" value="${data.location}" required><br>
-                <label>Mood</label><br>
+                <label>Mood:</label><br>
                 <select name="mood" id="mood" value="${data.mood}"><br>
                 <option>Happy</option>
                 <option>Calm</option>
@@ -310,11 +311,11 @@ function handleNavCreateButton() {
         $('#new-entry').removeClass('hide-display').html(` <form method="post" id="new-reflection">
             <fieldset>
             <legend class="section-header">Write a reflection</legend>
-            <label>Date</label><br>
+            <label>Date:</label><br>
             <input type="text" id="date" name="date" required><br>
-            <label>Location</label><br>
+            <label>Location:</label><br>
             <input type="text" id="location" name="location" required><br>
-            <label>Mood</label><br>
+            <label>Mood:</label><br>
             <select name="mood" id="mood"><br>
             <option>Happy</option>
             <option>Calm</option>
