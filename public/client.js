@@ -307,7 +307,7 @@ function handleUpdateReflection() {
 //navigation buttons
 
 function handleNavCreateButton() {
-    $('#nav-create-button').click(function () {
+    $('.dropdown-content').on('click', '#nav-create-button', function () {
         $('form#new-reflection :input').val("");
         $('#new-entry').removeClass('hide-display').html(` <form method="post" id="new-reflection">
             <fieldset>
@@ -354,6 +354,7 @@ function handleNavResourcesButton() {
 }
 
 
+
 $(function () {
     postNewReflection();
     handleDeleteReflections();
@@ -366,3 +367,24 @@ $(function () {
     handleNavResourcesButton();
     handleNewEntryButton();
 })
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function (event) {
+    if (!event.target.matches('.dropbtn')) {
+
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}

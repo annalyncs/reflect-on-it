@@ -154,11 +154,6 @@ ul {
     overflow: hidden;
 }
 
-navigation ul li {
-    display: inline;
-    text-align: center;
-}
-
 .start-page p {
     margin-bottom: 50px;
 }
@@ -171,11 +166,96 @@ div.navigation-buttons {
 }
 
 .nav-button {
-    background: rgba(177, 203, 187, 0.7);
-    border-radius: 7px;
-    border: 0px solid #b1cbbb;
     padding: 7px;
     color: white;
+    border-bottom: 1px solid rgba(177, 203, 187, 1)
+}
+
+navigation ul li {
+    display: inline;
+    font-size: 16px;
+}
+
+.dropdown-content li {
+    vertical-align: top;
+}
+
+
+/* Dropdown Button */
+
+.dropbtn {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: rgb(101, 134, 159);
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn p {
+    display: inline;
+    vertical-align: top;
+}
+
+
+/* Dropdown button on hover & focus */
+
+.dropbtn:hover,
+.dropbtn:focus {
+    background-color: white;
+}
+
+
+/* The container <div> - needed to position the dropdown content */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+/* Dropdown Content (Hidden by Default) */
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+
+/* Links inside the dropdown */
+
+.dropdown-content li {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content li:hover {
+    color: #65869f;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+
+/* Change color of dropdown links on hover */
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+
+.show {
+    display: block;
 }
 
 
@@ -207,6 +287,8 @@ div.navigation-buttons {
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #b1cbbb;
+    display: inline;
+    text-align: right;
 }
 
 .current-reflection h2 {
