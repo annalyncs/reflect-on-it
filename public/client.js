@@ -82,6 +82,7 @@ function displayReflections() {
             url: REFLECTIONS_URL
         })
         .done(function (data) {
+
             if (data.length === 0) {
                 $('#reflections-container').html('<p> No reflections found! </p>');
             };
@@ -92,7 +93,7 @@ function displayReflections() {
                         <p class="reflection-info">Date:</p> <p class="reflection-text">${reflection.date}</p><br><br>
                         <p class="reflection-info">Location:</p> <p class="reflection-text"> ${reflection.location}</p><br><br>
                         <p class="reflection-info">Mood:</p> <p class="reflection-text"> ${reflection.mood}</p><br><br>
-                        <p class="reflection-info">Entry:</p> <p class="reflection-text"> ${reflection.text}</p><br><br>
+                        <div id="truncate"><p class="reflection-info">Entry:</p> <p class="reflection-text"> ${reflection.text}</p></div><br><br>
                         <button id="edit-button" class="reflections-button">Edit</button>
                         <button id="delete-button" class="reflections-button">Delete</button>
                         <button id="current-button" class="reflections-button">View</button>
@@ -122,22 +123,22 @@ function displayReflectionsById() {
                 htmlOutput += '<input type="hidden" class="reflectionID" value="';
                 htmlOutput += data._id;
                 htmlOutput += '">';
-                htmlOutput += '<h2>Date:</h2>';
+                htmlOutput += '<h2>Reflection from: </h2>';
                 htmlOutput += '<p class="reflection-date">';
                 htmlOutput += data.date;
-                htmlOutput += '</p>';
-                htmlOutput += '<h2>Location:</h2>';
+                htmlOutput += '</p><br><br>';
+                htmlOutput += '<h2>Location: </h2>';
                 htmlOutput += '<p class="reflection-location">';
                 htmlOutput += data.location;
-                htmlOutput += '</p>';
-                htmlOutput += '<h2>Mood:</h2>';
+                htmlOutput += '</p><br><br>';
+                htmlOutput += '<h2>Mood: </h2>';
                 htmlOutput += '<p class="reflection-mood">';
                 htmlOutput += data.mood;
-                htmlOutput += '</p>';
-                htmlOutput += '<h2>Reflection:</h2>';
+                htmlOutput += '</p><br><br>';
+                htmlOutput += '<h2>Reflection: </h2>';
                 htmlOutput += '<p class="reflection-text">';
                 htmlOutput += data.text;
-                htmlOutput += '</p>';
+                htmlOutput += '</p><br><br>';
                 htmlOutput += '</div>';
                 htmlOutput += '<button id="edit-button" class="reflections-button">Edit</button>';
                 htmlOutput += '<button id="delete-button" class="reflections-button">Delete</button>';
@@ -171,7 +172,7 @@ function retrieveReflection() {
                 $('#new-entry').html(`<form method="post" id="new-reflection">
                 <input type="hidden" class="reflectionID" value="${data._id}">
                 <fieldset>
-                <legend style="color: #b1cbbb;">Write a reflection</legend>
+                <legend>Write a reflection</legend>
                 <label>Date:</label><br>
                 <input type="text" id="date" name="date" required value="${data.date}"><br>
                 <label>Location:</label><br>
