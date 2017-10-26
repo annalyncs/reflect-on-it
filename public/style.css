@@ -3,8 +3,12 @@ body {
     padding: 0;
     font-family: 'Roboto', sans-serif;
     background: #65869f;
+    background: url("https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1352&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
     min-height: 100%;
-    /*or 100vh */
     position: relative;
 }
 
@@ -42,7 +46,7 @@ button {
     background: white;
     padding: 8px;
     border-radius: 5px;
-    border: 1px solid #b1cbbb;
+    border: 1px solid #65869f;
 }
 
 .reflections-button {
@@ -58,7 +62,9 @@ div {
 section {
     margin: 30px;
     padding: 10px;
-    background: white;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid white;
+    border-radius: 10px;
 }
 
 .section-header {
@@ -174,17 +180,19 @@ div.navigation-buttons {
 
 .reflection-info {
     font-weight: 500;
-    display: inline
+    display: inline;
+    font-size: 20px;
+    padding: 10px;
 }
 
 .reflection-text {
-    color: #898281;
+    color: #fff;
     display: inline
 }
 
 #entries {
-    border: 1px solid #898281;
-    background: rgba(177, 203, 187, 0.2);
+    border: 2px solid #65869f;
+    background: rgba(101, 134, 159, 0.9);
     border-radius: 15px 0 15px 0;
     margin: 15px;
     padding: 20px;
@@ -195,7 +203,7 @@ div.navigation-buttons {
     background: white;
     padding: 8px;
     border-radius: 5px;
-    border: 1px solid #b1cbbb;
+    border: 1px solid #65869f;
 }
 
 .current-reflection h2 {
