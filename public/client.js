@@ -25,8 +25,6 @@ function postNewReflection() {
             'text': textInput,
         };
 
-        console.log(dataInput);
-
         let htmlOutput = "";
         $.ajax({
                 method: 'POST',
@@ -36,7 +34,6 @@ function postNewReflection() {
                 url: NEW_REFLECTIONS_URL
             })
             .done(function (data) {
-                console.log(data);
 
                 htmlOutput += '<div class="current-reflection">';
                 htmlOutput += '<input type="hidden" class="reflectionID" value="';
@@ -114,7 +111,6 @@ function displayReflections() {
 function displayReflectionsById() {
     $('#reflections').on('click', '#current-button', function () {
         let idParameter = $(this).parent().find('.reflectionID').val();
-        console.log(idParameter);
         $.ajax({
                 method: 'GET',
                 url: REFLECTIONS_URL + '/' + idParameter
@@ -165,14 +161,12 @@ function retrieveReflection() {
         $('#new-entry').removeClass('hide-display');
         $('#reflections-container').addClass('hide-display');
         let idParameter = $(this).parent().find('.reflectionID').val();
-        console.log(idParameter);
         $.ajax({
                 method: 'GET',
                 url: REFLECTIONS_URL + '/' + idParameter,
                 contentType: 'application/json'
             })
             .done(function (data) {
-                console.log(data);
                 $('#new-entry').html(`<form method="post" id="new-reflection">
                 <input type="hidden" class="reflectionID" value="${data._id}">
                 <fieldset>
@@ -228,7 +222,6 @@ function updateReflection() {
             data: JSON.stringify(newDataInput)
         })
         .done(function (data) {
-            console.log(newDataInput);
             htmlOutput += '<div class="current-reflection">';
             htmlOutput += '<input type="hidden" class="reflectionID" value="';
             htmlOutput += idParameter;
@@ -269,7 +262,6 @@ function updateReflection() {
 //delete selected reflection
 function deleteReflection() {
     let idParameter = $('div').find('.reflectionID').val();
-    console.log(idParameter);
     $.ajax({
             method: 'DELETE',
             url: REFLECTIONS_URL + '/' + idParameter,

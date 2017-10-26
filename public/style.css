@@ -185,7 +185,8 @@ div.navigation-buttons {
     margin: 15px;
 }
 
-#entries button {
+#entries button,
+.reflections-button {
     background: white;
     padding: 8px;
     border-radius: 5px;
