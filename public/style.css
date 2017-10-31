@@ -49,12 +49,6 @@ button {
     border: 1px solid #b1cbbb;
 }
 
-.reflections-button {
-    display: inline-block;
-    background: none;
-    border: 1px solid #b1cbbb;
-}
-
 div {
     padding: 10px;
 }
@@ -287,8 +281,7 @@ navigation ul li {
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #b1cbbb;
-    display: inline;
-    text-align: right;
+    text-align: center;
 }
 
 .current-reflection h2 {
