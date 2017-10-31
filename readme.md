@@ -4,6 +4,7 @@ Thinkful (https://thinkful.com/) Second Capstone Project - a fullstack app that 
 ![Self Reflections Home](https://github.com/annalyncs/self-reflections/blob/master/screenshots/self%20reflection%20home.png?raw=true)
 ![Self Reflections New Entry](https://github.com/annalyncs/self-reflections/blob/master/screenshots/self%20reflection%20new%20entry.png?raw=true)
 ![Self Reflections All Entries](https://github.com/annalyncs/self-reflections/blob/master/screenshots/self%20reflection%20all%20entries.png?raw=true)
+![Self Reflections One Entry](https://github.com/annalyncs/self-reflections/blob/master/screenshots/self%20reflection%20all%20entries.png?raw=true)
 ![Self Reflections Resources](https://github.com/annalyncs/self-reflections/blob/master/screenshots/self%20reflections%20resources.png?raw=true)
 
 
