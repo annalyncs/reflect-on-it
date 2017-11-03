@@ -353,6 +353,26 @@ function handleNavResourcesButton() {
     })
 }
 
+//When the user clicks on the button,
+//toggle between hiding and showing the dropdown content
+
+function showMenu() {
+    $('.dropbtn').click(function () {
+        console.log('clicked');
+        $('#myDropdown').toggle();
+    })
+};
+
+function hideMenu() {
+    //    $(document).click(function (e) {
+    //        if (e.target.class != 'drpbtn') {
+    //            $(".drpbtn").hide();
+    //        }
+    //    });
+    $('li').on('click', function () {
+        $('div#myDropdown').hide();
+    })
+};
 
 
 $(function () {
@@ -366,25 +386,6 @@ $(function () {
     handleNavViewButton();
     handleNavResourcesButton();
     handleNewEntryButton();
+    showMenu();
+    hideMenu();
 })
-
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function (event) {
-    if (!event.target.matches('.dropbtn')) {
-
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
